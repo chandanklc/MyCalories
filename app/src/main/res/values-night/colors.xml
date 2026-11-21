@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Splash screen (dark): light lines on deep green. -->
+    <color name="splash_background">#FF15201A</color>
+    <color name="splash_ink">#FFE3EAE4</color>
+    <color name="splash_accent">#FF7FD8A6</color>
+</resources>

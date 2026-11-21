@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Splash: the plate is sketched in two pen strokes, then the voice bars bounce up one by one.
+     About 950 ms; fits inside the 160dp splash circle. Colours follow light/dark mode. -->
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <aapt:attr name="android:drawable">
+        <vector
+            android:width="240dp" android:height="240dp"
+            android:viewportWidth="108" android:viewportHeight="108">
+            <group android:pivotX="54" android:pivotY="54" android:scaleX="1.15" android:scaleY="1.15">
+                <path android:name="outer"
+                    android:pathData="M54,26a28,28 0 1,1 0,56a28,28 0 1,1 0,-56"
+                    android:strokeColor="@color/splash_ink" android:strokeWidth="2.6" android:strokeLineCap="round"
+                    android:trimPathEnd="0" />
+                <path android:name="inner"
+                    android:pathData="M54,34a20,20 0 1,1 0,40a20,20 0 1,1 0,-40"
+                    android:strokeColor="@color/splash_ink" android:strokeWidth="2.6" android:strokeLineCap="round"
+                    android:trimPathEnd="0" />
+                <group android:name="b1" android:pivotX="54" android:pivotY="54" android:scaleY="0">
+                    <path android:pathData="M40,50v8"
+                        android:strokeColor="@color/splash_accent" android:strokeWidth="3.2" android:strokeLineCap="round" />
+                </group>
+                <group android:name="b2" android:pivotX="54" android:pivotY="54" android:scaleY="0">
+                    <path android:pathData="M47,45v18"
+                        android:strokeColor="@color/splash_accent" android:strokeWidth="3.2" android:strokeLineCap="round" />
+                </group>
+                <group android:name="b3" android:pivotX="54" android:pivotY="54" android:scaleY="0">
+                    <path android:pathData="M54,40v28"
+                        android:strokeColor="@color/splash_accent" android:strokeWidth="3.2" android:strokeLineCap="round" />
+                </group>
+                <group android:name="b4" android:pivotX="54" android:pivotY="54" android:scaleY="0">
+                    <path android:pathData="M61,44v20"
+                        android:strokeColor="@color/splash_accent" android:strokeWidth="3.2" android:strokeLineCap="round" />
+                </group>
+                <group android:name="b5" android:pivotX="54" android:pivotY="54" android:scaleY="0">
+                    <path android:pathData="M68,49v10"
+                        android:strokeColor="@color/splash_accent" android:strokeWidth="3.2" android:strokeLineCap="round" />
+                </group>
+            </group>
+        </vector>
+    </aapt:attr>
+
+    <target android:name="outer">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="trimPathEnd" android:duration="450"
+                android:valueFrom="0" android:valueTo="1" android:valueType="floatType"
+                android:interpolator="@android:interpolator/fast_out_slow_in" />
+        </aapt:attr>
+    </target>
+
+    <target android:name="inner">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="trimPathEnd" android:startOffset="150" android:duration="400"
+                android:valueFrom="0" android:valueTo="1" android:valueType="floatType"
+                android:interpolator="@android:interpolator/fast_out_slow_in" />
+        </aapt:attr>
+    </target>
+
+    <target android:name="b1">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="scaleY" android:startOffset="450" android:duration="260"
+                android:valueFrom="0" android:valueTo="1" android:valueType="floatType"
+                android:interpolator="@android:interpolator/overshoot" />
+        </aapt:attr>
+    </target>
+    <target android:name="b2">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="scaleY" android:startOffset="510" android:duration="260"
+                android:valueFrom="0" android:valueTo="1" android:valueType="floatType"
+                android:interpolator="@android:interpolator/overshoot" />
+        </aapt:attr>
+    </target>
+    <target android:name="b3">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="scaleY" android:startOffset="570" android:duration="260"
+                android:valueFrom="0" android:valueTo="1" android:valueType="floatType"
+                android:interpolator="@android:interpolator/overshoot" />
+        </aapt:attr>
+    </target>
+    <target android:name="b4">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="scaleY" android:startOffset="630" android:duration="260"
+                android:valueFrom="0" android:valueTo="1" android:valueType="floatType"
+                android:interpolator="@android:interpolator/overshoot" />
+        </aapt:attr>
+    </target>
+    <target android:name="b5">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="scaleY" android:startOffset="690" android:duration="260"
+                android:valueFrom="0" android:valueTo="1" android:valueType="floatType"
+                android:interpolator="@android:interpolator/overshoot" />
+        </aapt:attr>
+    </target>
+</animated-vector>

@@ -106,6 +106,7 @@ dependencies {
     implementation(libs.androidx.health.connect)
     implementation(libs.play.services.code.scanner)
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.core.splashscreen)
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)

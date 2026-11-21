@@ -13,6 +13,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import kotlinx.coroutines.flow.map
 import androidx.core.os.LocaleListCompat
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.mycalories.domain.repository.AppSettings
 import com.example.mycalories.domain.repository.ThemeMode
@@ -24,8 +25,20 @@ class MainActivity : AppCompatActivity() {
     /** What a notification, the widget or Health Connect asked to open. */
     private val openRequest = mutableStateOf<String?>(null)
 
+    /** The splash stays until saved settings (theme, language) are read, so the first frame is already right. */
+    @Volatile private var settingsReady = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        val splash = installSplashScreen()
         super.onCreate(savedInstanceState)
+        val shownAt = android.os.SystemClock.uptimeMillis()
+        // Never longer than 1.5 s, even if settings somehow fail to load.
+        splash.setKeepOnScreenCondition { !settingsReady && android.os.SystemClock.uptimeMillis() - shownAt < 1500 }
+        splash.setOnExitAnimationListener { view ->
+            // Fade and gently grow the splash away instead of cutting to the app.
+            view.view.animate().alpha(0f).scaleX(1.08f).scaleY(1.08f).setDuration(260L)
+                .withEndAction { view.remove() }.start()
+        }
         enableEdgeToEdge()
         val container = (application as MyCaloriesApp).container
         handle(intent)
@@ -33,7 +46,12 @@ class MainActivity : AppCompatActivity() {
             // Null until the saved settings have loaded, so the language is only changed once, to the saved one.
             val settingsFlow = remember { container.settings.settings.map<AppSettings, AppSettings?> { it } }
             val loaded by settingsFlow.collectAsStateWithLifecycle(null)
-            LaunchedEffect(loaded?.language) { loaded?.let { applyLanguage(it.language) } }
+            LaunchedEffect(loaded?.language) {
+                loaded?.let {
+                    applyLanguage(it.language)
+                    settingsReady = true
+                }
+            }
             val settings = loaded ?: AppSettings()
             val dark = when (settings.theme) {
                 ThemeMode.SYSTEM -> isSystemInDarkTheme()

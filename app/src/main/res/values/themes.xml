@@ -4,4 +4,12 @@
     <style name="Theme.MyCalories" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
+
+    <!-- Shown while the app starts: the plate sketches itself in, then the voice bars bounce up. -->
+    <style name="Theme.MyCalories.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/splash_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_icon_animated</item>
+        <item name="windowSplashScreenAnimationDuration">950</item>
+        <item name="postSplashScreenTheme">@style/Theme.MyCalories</item>
+    </style>
 </resources>
