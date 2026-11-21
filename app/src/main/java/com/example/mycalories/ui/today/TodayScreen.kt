@@ -54,6 +54,8 @@ import com.example.mycalories.R
 import com.example.mycalories.domain.MealSummary
 import com.example.mycalories.domain.model.MealType
 import com.example.mycalories.ui.components.CalorieRing
+import com.example.mycalories.ui.components.MealRingKey
+import com.example.mycalories.ui.components.ringSegments
 import com.example.mycalories.ui.components.MacroRow
 import com.example.mycalories.ui.components.MealIcon
 import com.example.mycalories.ui.components.kcal
@@ -167,10 +169,10 @@ fun TodayScreen(
 private fun SummaryCard(state: TodayUiState, onAddWater: () -> Unit, onRemoveWater: () -> Unit) {
     val summary = state.summary
     OutlinedCard(Modifier.fillMaxWidth()) {
+        val byMeal = summary.meals.associate { it.meal to it.total.calories }
+        val segments = ringSegments(byMeal, (summary.goal.calories + state.burnedCalories).toDouble())
         Row(Modifier.padding(18.dp), horizontalArrangement = Arrangement.spacedBy(18.dp), verticalAlignment = Alignment.CenterVertically) {
-            val progress = if (summary.goal.calories + state.burnedCalories <= 0) 0f
-            else (summary.eaten.calories / (summary.goal.calories + state.burnedCalories)).toFloat().coerceIn(0f, 1f)
-            CalorieRing(progress, state.remainingCalories, Modifier.testTag("calorieRing"))
+            CalorieRing(segments, state.remainingCalories, Modifier.testTag("calorieRing"))
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 StatRow(stringResource(R.string.goal), "%,d".format(summary.goal.calories))
                 StatRow(stringResource(R.string.eaten), summary.eaten.calories.kcal())
@@ -188,6 +190,9 @@ private fun SummaryCard(state: TodayUiState, onAddWater: () -> Unit, onRemoveWat
                     IconButton(onClick = onAddWater) { Icon(Icons.Filled.Add, stringResource(R.string.add_water)) }
                 }
             }
+        }
+        if (segments.isNotEmpty()) {
+            MealRingKey(segments, byMeal, Modifier.padding(start = 18.dp, end = 18.dp, bottom = 16.dp))
         }
     }
 }

@@ -1,12 +1,14 @@
 package com.example.mycalories
 
 import android.content.Intent
+import android.content.IntentSender
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -17,6 +19,8 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.mycalories.domain.repository.AppSettings
 import com.example.mycalories.domain.repository.ThemeMode
+import com.example.mycalories.ui.intro.IntroGate
+import com.example.mycalories.ui.intro.IntroOverlay
 import com.example.mycalories.ui.navigation.AppNavigation
 import com.example.mycalories.ui.theme.MyCaloriesTheme
 
@@ -27,6 +31,10 @@ class MainActivity : AppCompatActivity() {
 
     /** The splash stays until saved settings (theme, language) are read, so the first frame is already right. */
     @Volatile private var settingsReady = false
+
+    /** Plays the katori animation each time you come back to the app (the system splash covers fresh starts). */
+    private val introGate = IntroGate()
+    private val showIntro = mutableStateOf(false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val splash = installSplashScreen()
@@ -58,10 +66,41 @@ class MainActivity : AppCompatActivity() {
                 ThemeMode.LIGHT -> false
                 ThemeMode.DARK -> true
             }
-            MyCaloriesTheme(darkTheme = dark) {
-                AppNavigation(container, openRequest.value) { openRequest.value = null }
+            Box {
+                MyCaloriesTheme(darkTheme = dark) {
+                    AppNavigation(container, openRequest.value) { openRequest.value = null }
+                }
+                if (showIntro.value) IntroOverlay(onFinished = { showIntro.value = false })
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (introGate.onStart()) showIntro.value = true
+    }
+
+    override fun onStop() {
+        introGate.onStop(isChangingConfigurations)
+        super.onStop()
+    }
+
+    // Every screen the app opens itself (camera, scanner, share, Health Connect) goes through one of these,
+    // so coming back from it doesn't replay the intro.
+    @Deprecated("Called by the Activity Result API")
+    override fun startActivityForResult(intent: Intent, requestCode: Int, options: Bundle?) {
+        introGate.onOpeningOtherScreen()
+        @Suppress("DEPRECATION") super.startActivityForResult(intent, requestCode, options)
+    }
+
+    @Deprecated("Called by the Activity Result API")
+    override fun startIntentSenderForResult(
+        intent: IntentSender, requestCode: Int, fillInIntent: Intent?, flagsMask: Int, flagsValues: Int,
+        extraFlags: Int, options: Bundle?,
+    ) {
+        introGate.onOpeningOtherScreen()
+        @Suppress("DEPRECATION")
+        super.startIntentSenderForResult(intent, requestCode, fillInIntent, flagsMask, flagsValues, extraFlags, options)
     }
 
     override fun onNewIntent(intent: Intent) {

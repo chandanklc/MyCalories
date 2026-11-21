@@ -63,6 +63,21 @@ class ScreensUiTest {
     }
 
     @Test
+    fun `the ring has a colour key for each logged meal only`() {
+        val summary = DaySummary.of(today, listOf(
+            item("Poha", MealType.BREAKFAST, 100.0, 300.0), item("Dal", MealType.LUNCH, 100.0, 600.0)), goal)
+        compose.setContent {
+            MyCaloriesTheme {
+                TodayScreen(TodayUiState(today, true, summary, loading = false), PaddingValues(), {}, {}, {}, {}, {}, {}, {})
+            }
+        }
+        compose.onNodeWithTag("ringKey_BREAKFAST").assertTextContains("300", substring = true)
+        compose.onNodeWithTag("ringKey_LUNCH").assertTextContains("600", substring = true)
+        compose.onNodeWithTag("ringKey_DINNER").assertDoesNotExist()
+        compose.onNodeWithTag("ringKey_SNACK").assertDoesNotExist()
+    }
+
+    @Test
     fun `tapping a logged meal opens it and an empty meal adds to it`() {
         var opened: MealType? = null
         var added = 0

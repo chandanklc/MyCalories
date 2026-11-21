@@ -1,6 +1,9 @@
 package com.example.mycalories.ui.components
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.ui.platform.testTag
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -54,12 +57,47 @@ val MealType.icon: ImageVector
         MealType.DINNER -> Icons.Filled.Bedtime
     }
 
-/** Ring showing how much of the day's calories are used, with calories left in the middle. */
+/** A fixed colour per meal, used for its part of the calorie ring, its key and its icon. */
+object MealColors {
+    val breakfast = Color(0xFFE59A12) // morning sun
+    val lunch = Color(0xFF1E7F55)     // brand green
+    val snack = Color(0xFFD4507A)     // berry
+    val dinner = Color(0xFF5560D6)    // evening indigo
+
+    fun of(meal: MealType): Color = when (meal) {
+        MealType.BREAKFAST -> breakfast
+        MealType.LUNCH -> lunch
+        MealType.SNACK -> snack
+        MealType.DINNER -> dinner
+    }
+}
+
+/** One meal's part of the ring; [start] and [sweep] are fractions of the full circle. */
+data class RingSegment(val meal: MealType, val start: Float, val sweep: Float)
+
+/**
+ * Splits the ring by meal, in meal order. Each meal takes its share of the day's budget; once the
+ * budget is passed (or none is set) the meals fill the whole ring in proportion to each other.
+ */
+fun ringSegments(caloriesByMeal: Map<MealType, Double>, budget: Double): List<RingSegment> {
+    val eaten = MealType.entries.mapNotNull { m -> caloriesByMeal[m]?.takeIf { it > 0 }?.let { m to it } }
+    if (eaten.isEmpty()) return emptyList()
+    val total = eaten.sumOf { it.second }
+    val whole = if (budget > 0 && total <= budget) budget else total
+    var start = 0f
+    return eaten.map { (meal, kcal) ->
+        val sweep = (kcal / whole).toFloat()
+        RingSegment(meal, start, sweep).also { start += sweep }
+    }
+}
+
+/** Ring of the day's calories, coloured by meal, with calories left (or over) in the middle. */
 @Composable
-fun CalorieRing(progress: Float, remaining: Int, modifier: Modifier = Modifier, size: Dp = 140.dp) {
+fun CalorieRing(segments: List<RingSegment>, remaining: Int, modifier: Modifier = Modifier, size: Dp = 140.dp) {
     val label = stringResource(if (remaining >= 0) R.string.kcal_left else R.string.kcal_over)
-    val track = MaterialTheme.colorScheme.primaryContainer
-    val bar = if (remaining < 0) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary
+    // Neutral grey for the part not eaten yet, so it never looks like a meal colour.
+    val track = MaterialTheme.colorScheme.surfaceContainerHighest
+    val over = MaterialTheme.colorScheme.error
     Box(
         modifier
             .size(size)
@@ -71,12 +109,48 @@ fun CalorieRing(progress: Float, remaining: Int, modifier: Modifier = Modifier, 
             val inset = stroke / 2
             val arcSize = Size(this.size.width - stroke, this.size.height - stroke)
             drawArc(track, -90f, 360f, false, Offset(inset, inset), arcSize, style = Stroke(stroke))
-            drawArc(bar, -90f, 360f * progress, false, Offset(inset, inset), arcSize, style = Stroke(stroke, cap = StrokeCap.Round))
+            // A small gap between meals so each colour reads as its own part.
+            val gap = if (segments.size > 1) 2.5f else 0f
+            segments.forEach { s ->
+                val sweep = s.sweep * 360f
+                if (sweep > gap) drawArc(
+                    MealColors.of(s.meal), -90f + s.start * 360f + gap / 2, sweep - gap, false,
+                    Offset(inset, inset), arcSize, style = Stroke(stroke, cap = StrokeCap.Butt),
+                )
+            }
+            if (remaining < 0) {
+                // Thin red line inside the ring when the day's budget is passed.
+                val thin = 3.dp.toPx()
+                val o = stroke + thin
+                drawArc(over, 0f, 360f, false, Offset(o, o), Size(this.size.width - 2 * o, this.size.height - 2 * o),
+                    style = Stroke(thin))
+            }
         }
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text("%,d".format(kotlin.math.abs(remaining)), style = MaterialTheme.typography.headlineMedium)
             Text(label, style = MaterialTheme.typography.labelMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant)
+                color = if (remaining < 0) over else MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+    }
+}
+
+/** Colour key under the ring: a dot, the meal and its calories, for each meal logged. */
+@OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+@Composable
+fun MealRingKey(segments: List<RingSegment>, caloriesByMeal: Map<MealType, Double>, modifier: Modifier = Modifier) {
+    androidx.compose.foundation.layout.FlowRow(
+        modifier, horizontalArrangement = Arrangement.spacedBy(14.dp), verticalArrangement = Arrangement.spacedBy(6.dp),
+    ) {
+        segments.forEach { s ->
+            Row(
+                Modifier.testTag("ringKey_${s.meal.name}").semantics(mergeDescendants = true) {},
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
+            ) {
+                Box(Modifier.size(10.dp).background(MealColors.of(s.meal), CircleShape))
+                Text("${s.meal.label()} ${(caloriesByMeal[s.meal] ?: 0.0).kcal()}", style = MaterialTheme.typography.labelMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
         }
     }
 }
@@ -125,9 +199,10 @@ fun SourceChip(source: FoodSource, needsReview: Boolean) {
 
 @Composable
 fun MealIcon(meal: MealType, modifier: Modifier = Modifier) {
-    Surface(modifier.size(40.dp), shape = RoundedCornerShape(12.dp), color = MaterialTheme.colorScheme.secondaryContainer) {
+    val color = MealColors.of(meal)
+    Surface(modifier.size(40.dp), shape = RoundedCornerShape(12.dp), color = color.copy(alpha = 0.16f)) {
         Box(contentAlignment = Alignment.Center) {
-            Icon(meal.icon, contentDescription = null, tint = MaterialTheme.colorScheme.onSecondaryContainer)
+            Icon(meal.icon, contentDescription = null, tint = color)
         }
     }
 }
