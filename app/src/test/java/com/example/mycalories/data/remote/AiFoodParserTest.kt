@@ -171,6 +171,34 @@ class AiConfigTest {
         assertEquals(AiConfig.ClaudeDirect(claude), AiConfig.choose("", "", claude))
     }
 
+    private val groq = "gsk_" + "Ab12".repeat(13)
+
+    @Test
+    fun `groq is used first when its key is set`() {
+        assertEquals(
+            AiConfig.Groq(groq, AiConfig.DEFAULT_GROQ_MODEL, AiConfig.DEFAULT_GROQ_VISION_MODEL),
+            AiConfig.choose(gemini, "", claude, groqKey = groq),
+        )
+    }
+
+    @Test
+    fun `groq models can be changed`() {
+        assertEquals(AiConfig.Groq(groq, "openai/gpt-oss-120b", "meta-models/muse-spark-open"),
+            AiConfig.choose("", "", "", groqKey = groq, groqModel = "openai/gpt-oss-120b", groqVisionModel = " meta-models/muse-spark-open "))
+    }
+
+    @Test
+    fun `without a groq key gemini is still used`() {
+        assertEquals(AiConfig.Gemini(gemini, AiConfig.DEFAULT_GEMINI_MODEL), AiConfig.choose(gemini, "", "", groqKey = ""))
+    }
+
+    @Test
+    fun `groq placeholders count as not set`() {
+        assertEquals(AiConfig.None, AiConfig.choose("", "", "", groqKey = "gsk_..."))
+        assertEquals(AiConfig.None, AiConfig.choose("", "", "", groqKey = "gsk_short"))
+        assertEquals(AiConfig.None, AiConfig.choose("", "", "", groqKey = "your-groq-key"))
+    }
+
     @Test
     fun `placeholders count as not set`() {
         assertEquals(AiConfig.None, AiConfig.choose("AIza...", "", "sk-ant-..."))

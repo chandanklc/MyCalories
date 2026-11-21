@@ -172,8 +172,9 @@ class AiAssistant(private val transport: AiTransport) {
     }
 }
 
-/** Which AI service the app uses: Gemini (free tier), Claude with a key, or none. */
+/** Which AI service the app uses: Groq (free, fast), Gemini (free tier), Claude with a key, or none. */
 sealed interface AiConfig {
+    data class Groq(val apiKey: String, val model: String, val visionModel: String) : AiConfig
     data class Gemini(val apiKey: String, val model: String) : AiConfig
     data class ClaudeDirect(val apiKey: String) : AiConfig
     data object None : AiConfig
@@ -184,7 +185,21 @@ sealed interface AiConfig {
         /** Tried when the main model is busy or slow. */
         const val FALLBACK_GEMINI_MODEL = "gemini-3.8-flash"
 
-        fun choose(geminiKey: String, geminiModel: String, anthropicKey: String): AiConfig = when {
+        /** Groq: small fast model first, bigger one when it's busy or the reply doesn't fit. Both follow JSON schemas exactly. */
+        const val DEFAULT_GROQ_MODEL = "openai/gpt-oss-20b"
+        const val FALLBACK_GROQ_MODEL = "openai/gpt-oss-120b"
+        /** Groq's model that can see photos (a preview model; change GROQ_VISION_MODEL if Groq retires it). */
+        const val DEFAULT_GROQ_VISION_MODEL = "qwen/qwen3.8-27b"
+
+        fun choose(
+            geminiKey: String, geminiModel: String, anthropicKey: String,
+            groqKey: String = "", groqModel: String = "", groqVisionModel: String = "",
+        ): AiConfig = when {
+            looksLikeGroqKey(groqKey) -> Groq(
+                groqKey.trim(),
+                groqModel.trim().ifBlank { DEFAULT_GROQ_MODEL },
+                groqVisionModel.trim().ifBlank { DEFAULT_GROQ_VISION_MODEL },
+            )
             looksLikeGeminiKey(geminiKey) -> Gemini(geminiKey.trim(), geminiModel.trim().ifBlank { DEFAULT_GEMINI_MODEL })
             looksLikeClaudeKey(anthropicKey) -> ClaudeDirect(anthropicKey.trim())
             else -> None
@@ -197,6 +212,12 @@ sealed interface AiConfig {
         fun looksLikeGeminiKey(key: String): Boolean {
             val k = key.trim()
             return k.length >= 30 && !k.contains("...") && k.all { it.isLetterOrDigit() || it in "-_." }
+        }
+
+        /** Groq keys start with "gsk_" and are long; this catches placeholders like "gsk_...". */
+        fun looksLikeGroqKey(key: String): Boolean {
+            val k = key.trim()
+            return k.startsWith("gsk_") && k.length >= 40 && !k.contains("...") && k.all { it.isLetterOrDigit() || it == '_' }
         }
 
         /** Real Anthropic keys start with "sk-ant-" and are long; this catches placeholders like "sk-ant-...". */

@@ -102,10 +102,10 @@ Tap the mic and say something like *"two roti, a bowl of dal and some salad for 
    ```bash
    git clone https://github.com/chandanklc/MyCalories.git
    ```
-2. **Get a free Gemini API key** at [aistudio.google.com](https://aistudio.google.com) → **Get API key** → **Create API key**.
+2. **Get a free Groq API key** at [console.groq.com](https://console.groq.com) → **API Keys** → **Create API Key**. No card needed.
 3. **Add the key** to `local.properties` in the project folder. This file stays on your computer and is never committed.
    ```properties
-   GEMINI_API_KEY=your-key-here
+   GROQ_API_KEY=gsk_your-key-here
    ```
 4. **Sync Gradle and press Run.**
 
@@ -114,13 +114,16 @@ Tap the mic and say something like *"two roti, a bowl of dal and some salad for 
 
 | Setting in `local.properties` | What it does |
 |---|---|
+| `GROQ_MODEL` | Groq model for words (default `openai/gpt-oss-20b`, with `openai/gpt-oss-120b` as backup) |
+| `GROQ_VISION_MODEL` | Groq model for plate photos (default `qwen/qwen3.8-27b`) |
+| `GEMINI_API_KEY` | Use Google Gemini instead (used when no Groq key is set) |
 | `GEMINI_MODEL` | Use a different Gemini model (default `gemini-3.5-flash-lite`, with `gemini-3.8-flash` as backup) |
 | `USDA_API_KEY` | Your own key for USDA food lookups (a shared demo key is used otherwise) |
-| `ANTHROPIC_API_KEY` | Use Claude instead of Gemini (paid) |
+| `ANTHROPIC_API_KEY` | Use Claude instead (paid; used when no Groq or Gemini key is set) |
 
 </details>
 
-> **Privacy note:** on Gemini's free tier, Google may use what you send (food descriptions and plate photos) to improve its products. Your food diary itself stays on your phone.
+> **Privacy note:** food descriptions and plate photos are sent to the AI service you set up (Groq by default). Check its privacy policy; on Gemini's free tier, Google may use what you send to improve its products. Your food diary itself stays on your phone.
 
 <details>
 <summary><b>Signed release build</b></summary>
@@ -152,7 +155,7 @@ You get `app/build/outputs/apk/release/app-release.apk` (to install directly) an
 |---|---|
 | **UI** | Jetpack Compose with Material 3, one ViewModel per screen (MVVM) |
 | **Domain** | Plain Kotlin: goal calculator, portions, meal-time guessing, insights, weight trend |
-| **Data** | Room database, DataStore settings, Gemini client, USDA and Open Food Facts lookups |
+| **Data** | Room database, DataStore settings, Groq / Gemini clients, USDA and Open Food Facts lookups |
 | **Platform** | Speech recognition, camera, barcode scanner, Health Connect, WorkManager reminders, Glance widget |
 
 ```

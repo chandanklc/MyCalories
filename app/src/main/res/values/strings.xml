@@ -337,7 +337,7 @@
     <string name="stays_on_phone">Stays on your phone</string>
     <string name="stays_text">Your food diary, weight, profile, recipes and saved meals. Android backs them up only to your own Google account.</string>
     <string name="sent_title">Sent only to work out calories</string>
-    <string name="sent_text">What you say or type, and plate photos, go to Google Gemini to find the foods. On Gemini\'s free tier, Google may use them to improve its products. Plain food names go to USDA, and barcodes to Open Food Facts. Your name and email are never sent.</string>
+    <string name="sent_text">What you say or type, and plate photos, go to an online AI service (Groq, or Google Gemini if you set that up instead) to find the foods. Check that service\'s privacy policy for how it handles what you send; on Gemini\'s free tier, Google may use it to improve its products. Plain food names go to USDA, and barcodes to Open Food Facts. Your name and email are never sent.</string>
     <string name="server_note">Avoid photos with faces or anything private in them. Turn off photo logging below if you prefer.</string>
     <string name="allow_photos">Allow photo logging</string>
     <string name="keep_transcript">Keep what I said</string>

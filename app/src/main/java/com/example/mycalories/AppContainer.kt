@@ -11,6 +11,7 @@ import com.example.mycalories.data.remote.AiAssistant
 import com.example.mycalories.data.remote.AiConfig
 import com.example.mycalories.data.remote.AiTransport
 import com.example.mycalories.data.remote.GeminiTransport
+import com.example.mycalories.data.remote.GroqTransport
 import com.example.mycalories.data.remote.MissingKeyTransport
 import com.example.mycalories.data.remote.AiFoodParser
 import com.example.mycalories.data.remote.FoodParser
@@ -91,7 +92,9 @@ class AppContainer(context: Context) {
     private val ai: AiTransport = when (val c = AiConfig.choose(
         BuildConfig.GEMINI_API_KEY, BuildConfig.GEMINI_MODEL,
         BuildConfig.ANTHROPIC_API_KEY,
+        groqKey = BuildConfig.GROQ_API_KEY, groqModel = BuildConfig.GROQ_MODEL, groqVisionModel = BuildConfig.GROQ_VISION_MODEL,
     )) {
+        is AiConfig.Groq -> GroqTransport(http, c.apiKey, c.model, AiConfig.FALLBACK_GROQ_MODEL, c.visionModel)
         is AiConfig.Gemini -> GeminiTransport(http, c.apiKey, c.model, AiConfig.FALLBACK_GEMINI_MODEL)
         is AiConfig.ClaudeDirect -> AnthropicTransport.direct(c.apiKey)
         AiConfig.None -> MissingKeyTransport

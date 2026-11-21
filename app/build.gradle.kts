@@ -8,6 +8,8 @@ plugins {
 }
 
 // API keys live in local.properties (never committed):
+//   GROQ_API_KEY=gsk_...    (free, from console.groq.com; used first when set)
+//   GROQ_MODEL / GROQ_VISION_MODEL   (optional; defaults openai/gpt-oss-20b and qwen/qwen3.8-27b)
 //   GEMINI_API_KEY=AIza...   (free tier, from aistudio.google.com; used first when set)
 //   GEMINI_MODEL=gemini-3.5-flash-lite   (optional, this is the default)
 //   ANTHROPIC_API_KEY=sk-ant-...   (optional, Claude instead of Gemini)
@@ -41,6 +43,9 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
+        buildConfigField("String", "GROQ_API_KEY", "\"${localProps.getProperty("GROQ_API_KEY", "")}\"")
+        buildConfigField("String", "GROQ_MODEL", "\"${localProps.getProperty("GROQ_MODEL", "")}\"")
+        buildConfigField("String", "GROQ_VISION_MODEL", "\"${localProps.getProperty("GROQ_VISION_MODEL", "")}\"")
         buildConfigField("String", "GEMINI_API_KEY", "\"${localProps.getProperty("GEMINI_API_KEY", "")}\"")
         buildConfigField("String", "GEMINI_MODEL", "\"${localProps.getProperty("GEMINI_MODEL", "")}\"")
         buildConfigField("String", "ANTHROPIC_API_KEY", "\"${localProps.getProperty("ANTHROPIC_API_KEY", "")}\"")
