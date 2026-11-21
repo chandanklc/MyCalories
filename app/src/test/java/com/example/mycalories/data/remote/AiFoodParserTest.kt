@@ -152,33 +152,32 @@ class AiConfigTest {
 
     @Test
     fun `gemini is used when its key is set`() {
-        assertEquals(AiConfig.Gemini(gemini, "gemini-3.8-flash"), AiConfig.choose(gemini, "gemini-3.8-flash", claude, "", ""))
+        assertEquals(AiConfig.Gemini(gemini, "gemini-3.8-flash"), AiConfig.choose(gemini, "gemini-3.8-flash", claude))
     }
 
     @Test
     fun `newer AQ style google keys are accepted`() {
         val aq = "AQ." + "Ab9_x-".repeat(8)
-        assertEquals(AiConfig.Gemini(aq, AiConfig.DEFAULT_GEMINI_MODEL), AiConfig.choose(aq, "", "", "", ""))
+        assertEquals(AiConfig.Gemini(aq, AiConfig.DEFAULT_GEMINI_MODEL), AiConfig.choose(aq, "", ""))
     }
 
     @Test
     fun `blank gemini model falls back to the default`() {
-        assertEquals(AiConfig.Gemini(gemini, AiConfig.DEFAULT_GEMINI_MODEL), AiConfig.choose(gemini, " ", "", "", ""))
+        assertEquals(AiConfig.Gemini(gemini, AiConfig.DEFAULT_GEMINI_MODEL), AiConfig.choose(gemini, " ", ""))
     }
 
     @Test
-    fun `claude server, then claude key, when there is no gemini key`() {
-        assertEquals(AiConfig.ClaudeServer("https://x.workers.dev", "tok"), AiConfig.choose("", "", claude, "https://x.workers.dev", "tok"))
-        assertEquals(AiConfig.ClaudeDirect(claude), AiConfig.choose("", "", claude, "", ""))
+    fun `claude key is used when there is no gemini key`() {
+        assertEquals(AiConfig.ClaudeDirect(claude), AiConfig.choose("", "", claude))
     }
 
     @Test
     fun `placeholders count as not set`() {
-        assertEquals(AiConfig.None, AiConfig.choose("AIza...", "", "sk-ant-...", "", ""))
-        assertEquals(AiConfig.None, AiConfig.choose("your-key-here", "", "", "", ""))
-        assertEquals(AiConfig.None, AiConfig.choose("AQ...", "", "", "", ""))
-        assertEquals(AiConfig.None, AiConfig.choose("has a space in it and is quite long 12345", "", "", "", ""))
-        assertEquals(AiConfig.None, AiConfig.choose("", "", "", "", ""))
+        assertEquals(AiConfig.None, AiConfig.choose("AIza...", "", "sk-ant-..."))
+        assertEquals(AiConfig.None, AiConfig.choose("your-key-here", "", ""))
+        assertEquals(AiConfig.None, AiConfig.choose("AQ...", "", ""))
+        assertEquals(AiConfig.None, AiConfig.choose("has a space in it and is quite long 12345", "", ""))
+        assertEquals(AiConfig.None, AiConfig.choose("", "", ""))
     }
 }
 

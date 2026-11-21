@@ -75,11 +75,6 @@ class AnthropicTransport(
         const val MODEL = "claude-opus-5-5"
         private const val TAG = "MyCalories"
 
-        /** Claude through your own server (no key in the app) or with a key. */
-        fun server(url: String, appToken: String): AiTransport = AnthropicTransport(
-            AnthropicOkHttpClient.builder().baseUrl(url).apiKey(appToken.ifBlank { "app" }).build(),
-        )
-
         fun direct(apiKey: String): AiTransport = AnthropicTransport(AnthropicOkHttpClient.builder().apiKey(apiKey).build())
     }
 }

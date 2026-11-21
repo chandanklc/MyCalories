@@ -90,10 +90,9 @@ class AppContainer(context: Context) {
     }
     private val ai: AiTransport = when (val c = AiConfig.choose(
         BuildConfig.GEMINI_API_KEY, BuildConfig.GEMINI_MODEL,
-        BuildConfig.ANTHROPIC_API_KEY, BuildConfig.CLAUDE_PROXY_URL, BuildConfig.CLAUDE_PROXY_TOKEN,
+        BuildConfig.ANTHROPIC_API_KEY,
     )) {
         is AiConfig.Gemini -> GeminiTransport(http, c.apiKey, c.model, AiConfig.FALLBACK_GEMINI_MODEL)
-        is AiConfig.ClaudeServer -> AnthropicTransport.server(c.url, c.appToken)
         is AiConfig.ClaudeDirect -> AnthropicTransport.direct(c.apiKey)
         AiConfig.None -> MissingKeyTransport
     }

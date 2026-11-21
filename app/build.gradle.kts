@@ -35,11 +35,6 @@ android {
         buildConfigField("String", "GEMINI_API_KEY", "\"${localProps.getProperty("GEMINI_API_KEY", "")}\"")
         buildConfigField("String", "GEMINI_MODEL", "\"${localProps.getProperty("GEMINI_MODEL", "")}\"")
         buildConfigField("String", "ANTHROPIC_API_KEY", "\"${localProps.getProperty("ANTHROPIC_API_KEY", "")}\"")
-        // Optional: route Claude calls through your own server so no Anthropic key ships in the app.
-        //   CLAUDE_PROXY_URL=https://your-worker.example.workers.dev
-        //   CLAUDE_PROXY_TOKEN=app token the server accepts
-        buildConfigField("String", "CLAUDE_PROXY_URL", "\"${localProps.getProperty("CLAUDE_PROXY_URL", "")}\"")
-        buildConfigField("String", "CLAUDE_PROXY_TOKEN", "\"${localProps.getProperty("CLAUDE_PROXY_TOKEN", "")}\"")
         buildConfigField("String", "USDA_API_KEY", "\"${localProps.getProperty("USDA_API_KEY", "DEMO_KEY")}\"")
     }
 

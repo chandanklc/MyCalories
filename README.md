@@ -117,7 +117,6 @@ Tap the mic and say something like *"two roti, a bowl of dal and some salad for 
 | `GEMINI_MODEL` | Use a different Gemini model (default `gemini-3.5-flash-lite`, with `gemini-3.8-flash` as backup) |
 | `USDA_API_KEY` | Your own key for USDA food lookups (a shared demo key is used otherwise) |
 | `ANTHROPIC_API_KEY` | Use Claude instead of Gemini (paid) |
-| `CLAUDE_PROXY_URL`, `CLAUDE_PROXY_TOKEN` | Use Claude through your own small server so no key is in the app. See [server/](server/README.md) |
 
 </details>
 

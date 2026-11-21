@@ -172,10 +172,9 @@ class AiAssistant(private val transport: AiTransport) {
     }
 }
 
-/** Which AI service the app uses: Gemini (free tier), Claude through your own server, Claude with a key, or none. */
+/** Which AI service the app uses: Gemini (free tier), Claude with a key, or none. */
 sealed interface AiConfig {
     data class Gemini(val apiKey: String, val model: String) : AiConfig
-    data class ClaudeServer(val url: String, val appToken: String) : AiConfig
     data class ClaudeDirect(val apiKey: String) : AiConfig
     data object None : AiConfig
 
@@ -185,9 +184,8 @@ sealed interface AiConfig {
         /** Tried when the main model is busy or slow. */
         const val FALLBACK_GEMINI_MODEL = "gemini-3.8-flash"
 
-        fun choose(geminiKey: String, geminiModel: String, anthropicKey: String, proxyUrl: String, proxyToken: String): AiConfig = when {
+        fun choose(geminiKey: String, geminiModel: String, anthropicKey: String): AiConfig = when {
             looksLikeGeminiKey(geminiKey) -> Gemini(geminiKey.trim(), geminiModel.trim().ifBlank { DEFAULT_GEMINI_MODEL })
-            proxyUrl.isNotBlank() -> ClaudeServer(proxyUrl.trim(), proxyToken.trim())
             looksLikeClaudeKey(anthropicKey) -> ClaudeDirect(anthropicKey.trim())
             else -> None
         }
