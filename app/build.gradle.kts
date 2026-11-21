@@ -17,6 +17,15 @@ val localProps = Properties().apply {
     if (f.exists()) f.inputStream().use { load(it) }
 }
 
+// Release signing lives in keystore.properties at the project root (never committed):
+//   storeFile=keystore/mycalories-release.jks
+//   storePassword=...   keyAlias=mycalories   keyPassword=...
+// Without it, release builds are simply left unsigned.
+val keystoreProps = Properties().apply {
+    val f = rootProject.file("keystore.properties")
+    if (f.exists()) f.inputStream().use { load(it) }
+}
+
 android {
     namespace = "com.example.mycalories"
     compileSdk {
@@ -38,11 +47,24 @@ android {
         buildConfigField("String", "USDA_API_KEY", "\"${localProps.getProperty("USDA_API_KEY", "DEMO_KEY")}\"")
     }
 
+    signingConfigs {
+        if (keystoreProps.getProperty("storeFile") != null) {
+            create("release") {
+                storeFile = rootProject.file(keystoreProps.getProperty("storeFile"))
+                storePassword = keystoreProps.getProperty("storePassword")
+                keyAlias = keystoreProps.getProperty("keyAlias")
+                keyPassword = keystoreProps.getProperty("keyPassword")
+            }
+        }
+    }
+
     buildTypes {
         release {
+            signingConfigs.findByName("release")?.let { signingConfig = it }
             optimization {
+                // Shrink and optimise the whole app. (Limiting it to library packages with packageScope
+                // made R8 move Kotlin classes across packages and crash at start-up.)
                 enable = true
-                packageScope = setOf("androidx.**", "kotlin.**", "kotlinx.**")
             }
         }
     }

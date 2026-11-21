@@ -122,6 +122,28 @@ Tap the mic and say something like *"two roti, a bowl of dal and some salad for 
 
 > **Privacy note:** on Gemini's free tier, Google may use what you send (food descriptions and plate photos) to improve its products. Your food diary itself stays on your phone.
 
+<details>
+<summary><b>Signed release build</b></summary>
+
+Release builds are signed from `keystore.properties` in the project folder. That file and the `keystore/` folder are never committed.
+
+```properties
+storeFile=keystore/mycalories-release.jks
+storePassword=...
+keyAlias=mycalories
+keyPassword=...
+```
+
+Then build:
+
+```bash
+./gradlew :app:assembleRelease :app:bundleRelease
+```
+
+You get `app/build/outputs/apk/release/app-release.apk` (to install directly) and `app/build/outputs/bundle/release/app-release.aab` (for Google Play). Without `keystore.properties`, release builds are left unsigned.
+
+</details>
+
 ---
 
 ## How it's built
