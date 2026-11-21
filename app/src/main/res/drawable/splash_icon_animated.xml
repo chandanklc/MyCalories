@@ -1,94 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Splash: the plate is sketched in two pen strokes, then the voice bars bounce up one by one.
-     About 950 ms; fits inside the 160dp splash circle. Colours follow light/dark mode. -->
+<!-- Splash: the bowl is sketched in, the steam rises as voice waves, the calculator pops up,
+     then its keys light up one by one ending on the saffron "total" key. About 1 s; fits the 160dp splash circle. -->
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:aapt="http://schemas.android.com/aapt">
     <aapt:attr name="android:drawable">
-        <vector
-            android:width="240dp" android:height="240dp"
+        <vector android:width="240dp" android:height="240dp"
             android:viewportWidth="108" android:viewportHeight="108">
-            <group android:pivotX="54" android:pivotY="54" android:scaleX="1.15" android:scaleY="1.15">
-                <path android:name="outer"
-                    android:pathData="M54,26a28,28 0 1,1 0,56a28,28 0 1,1 0,-56"
-                    android:strokeColor="@color/splash_ink" android:strokeWidth="2.6" android:strokeLineCap="round"
-                    android:trimPathEnd="0" />
-                <path android:name="inner"
-                    android:pathData="M54,34a20,20 0 1,1 0,40a20,20 0 1,1 0,-40"
-                    android:strokeColor="@color/splash_ink" android:strokeWidth="2.6" android:strokeLineCap="round"
-                    android:trimPathEnd="0" />
-                <group android:name="b1" android:pivotX="54" android:pivotY="54" android:scaleY="0">
-                    <path android:pathData="M40,50v8"
-                        android:strokeColor="@color/splash_accent" android:strokeWidth="3.2" android:strokeLineCap="round" />
-                </group>
-                <group android:name="b2" android:pivotX="54" android:pivotY="54" android:scaleY="0">
-                    <path android:pathData="M47,45v18"
-                        android:strokeColor="@color/splash_accent" android:strokeWidth="3.2" android:strokeLineCap="round" />
-                </group>
-                <group android:name="b3" android:pivotX="54" android:pivotY="54" android:scaleY="0">
-                    <path android:pathData="M54,40v28"
-                        android:strokeColor="@color/splash_accent" android:strokeWidth="3.2" android:strokeLineCap="round" />
-                </group>
-                <group android:name="b4" android:pivotX="54" android:pivotY="54" android:scaleY="0">
-                    <path android:pathData="M61,44v20"
-                        android:strokeColor="@color/splash_accent" android:strokeWidth="3.2" android:strokeLineCap="round" />
-                </group>
-                <group android:name="b5" android:pivotX="54" android:pivotY="54" android:scaleY="0">
-                    <path android:pathData="M68,49v10"
-                        android:strokeColor="@color/splash_accent" android:strokeWidth="3.2" android:strokeLineCap="round" />
-                </group>
+            <group android:pivotX="55" android:pivotY="55.5" android:scaleX="0.66" android:scaleY="0.66" android:translateX="-1" android:translateY="-1.5">
+        <path android:name="bowl" android:pathData="M22,54H70M22,54A24,24 0 0,0 60.1,73.4"
+            android:strokeColor="@color/splash_line" android:strokeWidth="4" android:strokeLineCap="round" android:strokeLineJoin="round" android:trimPathEnd="0" />
+        <path android:name="foot" android:pathData="M37,84h18"
+            android:strokeColor="@color/splash_line" android:strokeWidth="4" android:strokeLineCap="round" android:strokeLineJoin="round" android:strokeAlpha="0" />
+        <path android:name="w1" android:pathData="M38,44a10,10 0 0,1 16,0"
+            android:strokeColor="@color/splash_line" android:strokeWidth="4" android:strokeLineCap="round" android:strokeLineJoin="round" android:strokeAlpha="0" />
+        <path android:name="w2" android:pathData="M32,36a18,18 0 0,1 28,0"
+            android:strokeColor="@color/splash_line" android:strokeWidth="4" android:strokeLineCap="round" android:strokeLineJoin="round" android:strokeAlpha="0" />
+        <path android:name="w3" android:pathData="M26,28a26,26 0 0,1 40,0"
+            android:strokeColor="@color/splash_line" android:strokeWidth="4" android:strokeLineCap="round" android:strokeLineJoin="round" android:strokeAlpha="0" />
+        <group android:name="calc" android:pivotX="75" android:pivotY="76" android:scaleX="0" android:scaleY="0">
+            <path android:pathData="M67,60h16a5,5 0 0,1 5,5v22a5,5 0 0,1 -5,5h-16a5,5 0 0,1 -5,-5v-22a5,5 0 0,1 5,-5z"
+            android:strokeColor="@color/splash_line" android:strokeWidth="4" android:strokeLineCap="round" android:strokeLineJoin="round" />
+            <path android:pathData="M68,67h14"
+            android:strokeColor="@color/splash_line" android:strokeWidth="4" android:strokeLineCap="round" android:strokeLineJoin="round" />
+        </group>
+        <group android:name="k1" android:pivotX="69" android:pivotY="76" android:scaleX="0" android:scaleY="0">
+            <path android:pathData="M66.7,76a2.3,2.3 0 1,0 4.6,0a2.3,2.3 0 1,0 -4.6,0" android:fillColor="@color/splash_line" />
+        </group>
+        <group android:name="k2" android:pivotX="75" android:pivotY="76" android:scaleX="0" android:scaleY="0">
+            <path android:pathData="M72.7,76a2.3,2.3 0 1,0 4.6,0a2.3,2.3 0 1,0 -4.6,0" android:fillColor="@color/splash_line" />
+        </group>
+        <group android:name="k3" android:pivotX="81" android:pivotY="76" android:scaleX="0" android:scaleY="0">
+            <path android:pathData="M78.7,76a2.3,2.3 0 1,0 4.6,0a2.3,2.3 0 1,0 -4.6,0" android:fillColor="@color/splash_line" />
+        </group>
+        <group android:name="k4" android:pivotX="69" android:pivotY="84" android:scaleX="0" android:scaleY="0">
+            <path android:pathData="M66.7,84a2.3,2.3 0 1,0 4.6,0a2.3,2.3 0 1,0 -4.6,0" android:fillColor="@color/splash_line" />
+        </group>
+        <group android:name="k5" android:pivotX="75" android:pivotY="84" android:scaleX="0" android:scaleY="0">
+            <path android:pathData="M72.7,84a2.3,2.3 0 1,0 4.6,0a2.3,2.3 0 1,0 -4.6,0" android:fillColor="@color/splash_line" />
+        </group>
+        <group android:name="k6" android:pivotX="81" android:pivotY="84" android:scaleX="0" android:scaleY="0">
+            <path android:pathData="M78.7,84a2.3,2.3 0 1,0 4.6,0a2.3,2.3 0 1,0 -4.6,0" android:fillColor="@color/splash_accent" />
+        </group>
             </group>
         </vector>
     </aapt:attr>
 
-    <target android:name="outer">
+    <target android:name="bowl">
         <aapt:attr name="android:animation">
-            <objectAnimator android:propertyName="trimPathEnd" android:duration="450"
-                android:valueFrom="0" android:valueTo="1" android:valueType="floatType"
-                android:interpolator="@android:interpolator/fast_out_slow_in" />
+            <set>
+                <objectAnimator android:propertyName="trimPathEnd" android:startOffset="0" android:duration="350"
+                    android:valueFrom="0" android:valueTo="1" android:valueType="floatType"
+                    android:interpolator="@android:interpolator/fast_out_slow_in" />
+            </set>
         </aapt:attr>
     </target>
-
-    <target android:name="inner">
+    <target android:name="foot">
         <aapt:attr name="android:animation">
-            <objectAnimator android:propertyName="trimPathEnd" android:startOffset="150" android:duration="400"
-                android:valueFrom="0" android:valueTo="1" android:valueType="floatType"
-                android:interpolator="@android:interpolator/fast_out_slow_in" />
+            <set>
+                <objectAnimator android:propertyName="strokeAlpha" android:startOffset="250" android:duration="150"
+                    android:valueFrom="0" android:valueTo="1" android:valueType="floatType"
+                    android:interpolator="@android:interpolator/fast_out_slow_in" />
+            </set>
         </aapt:attr>
     </target>
-
-    <target android:name="b1">
+    <target android:name="w1">
         <aapt:attr name="android:animation">
-            <objectAnimator android:propertyName="scaleY" android:startOffset="450" android:duration="260"
-                android:valueFrom="0" android:valueTo="1" android:valueType="floatType"
-                android:interpolator="@android:interpolator/overshoot" />
+            <set>
+                <objectAnimator android:propertyName="strokeAlpha" android:startOffset="250" android:duration="180"
+                    android:valueFrom="0" android:valueTo="1" android:valueType="floatType"
+                    android:interpolator="@android:interpolator/fast_out_slow_in" />
+            </set>
         </aapt:attr>
     </target>
-    <target android:name="b2">
+    <target android:name="w2">
         <aapt:attr name="android:animation">
-            <objectAnimator android:propertyName="scaleY" android:startOffset="510" android:duration="260"
-                android:valueFrom="0" android:valueTo="1" android:valueType="floatType"
-                android:interpolator="@android:interpolator/overshoot" />
+            <set>
+                <objectAnimator android:propertyName="strokeAlpha" android:startOffset="330" android:duration="180"
+                    android:valueFrom="0" android:valueTo="0.75" android:valueType="floatType"
+                    android:interpolator="@android:interpolator/fast_out_slow_in" />
+            </set>
         </aapt:attr>
     </target>
-    <target android:name="b3">
+    <target android:name="w3">
         <aapt:attr name="android:animation">
-            <objectAnimator android:propertyName="scaleY" android:startOffset="570" android:duration="260"
-                android:valueFrom="0" android:valueTo="1" android:valueType="floatType"
-                android:interpolator="@android:interpolator/overshoot" />
+            <set>
+                <objectAnimator android:propertyName="strokeAlpha" android:startOffset="410" android:duration="180"
+                    android:valueFrom="0" android:valueTo="0.5" android:valueType="floatType"
+                    android:interpolator="@android:interpolator/fast_out_slow_in" />
+            </set>
         </aapt:attr>
     </target>
-    <target android:name="b4">
+    <target android:name="calc">
         <aapt:attr name="android:animation">
-            <objectAnimator android:propertyName="scaleY" android:startOffset="630" android:duration="260"
-                android:valueFrom="0" android:valueTo="1" android:valueType="floatType"
-                android:interpolator="@android:interpolator/overshoot" />
+            <set>
+                <objectAnimator android:propertyName="scaleX" android:startOffset="450" android:duration="220"
+                    android:valueFrom="0" android:valueTo="1" android:valueType="floatType"
+                    android:interpolator="@android:interpolator/overshoot" />
+                <objectAnimator android:propertyName="scaleY" android:startOffset="450" android:duration="220"
+                    android:valueFrom="0" android:valueTo="1" android:valueType="floatType"
+                    android:interpolator="@android:interpolator/overshoot" />
+            </set>
         </aapt:attr>
     </target>
-    <target android:name="b5">
+    <target android:name="k1">
         <aapt:attr name="android:animation">
-            <objectAnimator android:propertyName="scaleY" android:startOffset="690" android:duration="260"
-                android:valueFrom="0" android:valueTo="1" android:valueType="floatType"
-                android:interpolator="@android:interpolator/overshoot" />
+            <set>
+                <objectAnimator android:propertyName="scaleX" android:startOffset="620" android:duration="160"
+                    android:valueFrom="0" android:valueTo="1" android:valueType="floatType"
+                    android:interpolator="@android:interpolator/overshoot" />
+                <objectAnimator android:propertyName="scaleY" android:startOffset="620" android:duration="160"
+                    android:valueFrom="0" android:valueTo="1" android:valueType="floatType"
+                    android:interpolator="@android:interpolator/overshoot" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="k2">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="scaleX" android:startOffset="665" android:duration="160"
+                    android:valueFrom="0" android:valueTo="1" android:valueType="floatType"
+                    android:interpolator="@android:interpolator/overshoot" />
+                <objectAnimator android:propertyName="scaleY" android:startOffset="665" android:duration="160"
+                    android:valueFrom="0" android:valueTo="1" android:valueType="floatType"
+                    android:interpolator="@android:interpolator/overshoot" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="k3">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="scaleX" android:startOffset="710" android:duration="160"
+                    android:valueFrom="0" android:valueTo="1" android:valueType="floatType"
+                    android:interpolator="@android:interpolator/overshoot" />
+                <objectAnimator android:propertyName="scaleY" android:startOffset="710" android:duration="160"
+                    android:valueFrom="0" android:valueTo="1" android:valueType="floatType"
+                    android:interpolator="@android:interpolator/overshoot" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="k4">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="scaleX" android:startOffset="755" android:duration="160"
+                    android:valueFrom="0" android:valueTo="1" android:valueType="floatType"
+                    android:interpolator="@android:interpolator/overshoot" />
+                <objectAnimator android:propertyName="scaleY" android:startOffset="755" android:duration="160"
+                    android:valueFrom="0" android:valueTo="1" android:valueType="floatType"
+                    android:interpolator="@android:interpolator/overshoot" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="k5">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="scaleX" android:startOffset="800" android:duration="160"
+                    android:valueFrom="0" android:valueTo="1" android:valueType="floatType"
+                    android:interpolator="@android:interpolator/overshoot" />
+                <objectAnimator android:propertyName="scaleY" android:startOffset="800" android:duration="160"
+                    android:valueFrom="0" android:valueTo="1" android:valueType="floatType"
+                    android:interpolator="@android:interpolator/overshoot" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="k6">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="scaleX" android:startOffset="845" android:duration="160"
+                    android:valueFrom="0" android:valueTo="1" android:valueType="floatType"
+                    android:interpolator="@android:interpolator/overshoot" />
+                <objectAnimator android:propertyName="scaleY" android:startOffset="845" android:duration="160"
+                    android:valueFrom="0" android:valueTo="1" android:valueType="floatType"
+                    android:interpolator="@android:interpolator/overshoot" />
+            </set>
         </aapt:attr>
     </target>
 </animated-vector>

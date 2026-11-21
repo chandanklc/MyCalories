@@ -5,11 +5,11 @@
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
-    <!-- Shown while the app starts: the plate sketches itself in, then the voice bars bounce up. -->
+    <!-- Shown while the app starts: the katori sketches in, steam rises as voice waves, the calculator keys tap in. -->
     <style name="Theme.MyCalories.Starting" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/splash_background</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/splash_icon_animated</item>
-        <item name="windowSplashScreenAnimationDuration">950</item>
+        <item name="windowSplashScreenAnimationDuration">1000</item>
         <item name="postSplashScreenTheme">@style/Theme.MyCalories</item>
     </style>
 </resources>

@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- App icon: ink line drawing on cream paper, with a green voice waveform. -->
-    <color name="icon_paper">#FFFBF6EC</color>
-    <color name="icon_ink">#FF1F3A2B</color>
     <color name="brand_green">#FF1E7F55</color>
 
+    <!-- App icon "Katori + calculator": white line drawing on brand green, saffron "total" key. -->
+    <color name="icon_background">#FF1E7F55</color>
+    <color name="icon_line">#FFFFFFFF</color>
+    <color name="icon_accent">#FFFFD58A</color>
+
     <!-- Splash screen (light). -->
-    <color name="splash_background">#FFFBF6EC</color>
-    <color name="splash_ink">#FF1F3A2B</color>
-    <color name="splash_accent">#FF1E7F55</color>
+    <color name="splash_background">#FF1E7F55</color>
+    <color name="splash_line">#FFFFFFFF</color>
+    <color name="splash_accent">#FFFFD58A</color>
 </resources>

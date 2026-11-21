@@ -39,7 +39,17 @@ class BrandResourcesTest {
         val pm = ctx.packageManager
         val info = pm.getActivityInfo(android.content.ComponentName(ctx, com.example.mycalories.MainActivity::class.java), 0)
         assertEquals(R.style.Theme_MyCalories_Starting, info.themeResource)
-        assertEquals(0xFFFBF6EC.toInt(), ContextCompat.getColor(ctx, R.color.icon_paper))
-        assertEquals(0xFF1E7F55.toInt(), ContextCompat.getColor(ctx, R.color.brand_green))
+    }
+
+    @Test
+    fun `C4 katori and calculator icon uses white lines on brand green with a saffron total key`() {
+        val green = 0xFF1E7F55.toInt()
+        assertEquals(green, ContextCompat.getColor(ctx, R.color.brand_green))
+        assertEquals(green, ContextCompat.getColor(ctx, R.color.icon_background))
+        assertEquals(0xFFFFFFFF.toInt(), ContextCompat.getColor(ctx, R.color.icon_line))
+        assertEquals(0xFFFFD58A.toInt(), ContextCompat.getColor(ctx, R.color.icon_accent))
+        assertEquals(green, ContextCompat.getColor(ctx, R.color.splash_background))
+        assertEquals(0xFFFFFFFF.toInt(), ContextCompat.getColor(ctx, R.color.splash_line))
+        assertEquals(0xFFFFD58A.toInt(), ContextCompat.getColor(ctx, R.color.splash_accent))
     }
 }
