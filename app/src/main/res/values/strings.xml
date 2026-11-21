@@ -1,0 +1,364 @@
+<resources>
+    <string name="app_name">MyCalories</string>
+
+    <!-- General -->
+    <string name="back">Back</string>
+    <string name="close">Close</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="undo">Undo</string>
+    <string name="more_options">More options</string>
+    <string name="today">Today</string>
+    <string name="kcal_left">kcal left</string>
+    <string name="kcal_over">kcal over</string>
+    <string name="kcal_value">%1$s kcal</string>
+    <string name="grams_value">%1$s g</string>
+    <string name="try_again">Try again</string>
+    <string name="type_instead">Type instead</string>
+    <string name="send">Send</string>
+
+    <!-- Meals -->
+    <string name="meal_breakfast">Breakfast</string>
+    <string name="meal_lunch">Lunch</string>
+    <string name="meal_snack">Snack</string>
+    <string name="meal_dinner">Dinner</string>
+
+    <!-- Navigation -->
+    <string name="nav_today">Today</string>
+    <string name="nav_history">History</string>
+    <string name="nav_foods">Foods</string>
+    <string name="nav_profile">Profile</string>
+
+    <!-- Nutrients -->
+    <string name="protein">Protein</string>
+    <string name="carbs">Carbs</string>
+    <string name="fat">Fat</string>
+    <string name="fiber">Fiber</string>
+    <string name="macro_of_goal">%1$d/%2$dg</string>
+    <string name="g_protein">%1$sg protein</string>
+    <string name="g_carbs">%1$sg carbs</string>
+    <string name="g_fat">%1$sg fat</string>
+    <string name="g_fiber">%1$sg fiber</string>
+    <string name="short_macros">P %1$s · C %2$s · F %3$s</string>
+    <string name="iron">Iron</string>
+    <string name="calcium">Calcium</string>
+    <string name="vitamin_b12">Vitamin B12</string>
+    <string name="vitamin_d">Vitamin D</string>
+    <string name="vitamin_c">Vitamin C</string>
+    <string name="potassium">Potassium</string>
+    <string name="sodium">Sodium</string>
+
+    <!-- Sources -->
+    <string name="source_local">On device</string>
+    <string name="source_recipe">My recipe</string>
+    <string name="source_usda">Online · USDA</string>
+    <string name="source_estimate">Estimated</string>
+    <string name="source_packaged">Package label</string>
+    <string name="please_check">Please check</string>
+
+    <!-- Units -->
+    <string name="unit_piece">piece</string>
+    <string name="unit_bowl">bowl</string>
+    <string name="unit_katori">katori</string>
+    <string name="unit_cup">cup</string>
+    <string name="unit_tbsp">tbsp</string>
+    <string name="unit_tsp">tsp</string>
+    <string name="unit_g">g</string>
+    <string name="unit_glass">glass</string>
+    <string name="unit_plate">plate</string>
+    <string name="unit_slice">slice</string>
+    <string name="unit_serving">serving</string>
+
+    <!-- Today -->
+    <string name="goal">Goal</string>
+    <string name="eaten">Eaten</string>
+    <string name="burned">Burned</string>
+    <string name="water_glasses">%1$d glasses</string>
+    <string name="add_water">Add a glass of water</string>
+    <string name="remove_water">Remove a glass of water</string>
+    <string name="previous_day">Previous day</string>
+    <string name="next_day">Next day</string>
+    <string name="not_logged_yet">Not logged yet</string>
+    <string name="add_meal">Add %1$s</string>
+    <string name="steps_line">%1$s steps · from Health Connect</string>
+    <string name="quick_add_title">Quick add from yesterday</string>
+    <string name="same_meal">Same %1$s · %2$d</string>
+    <string name="copy_whole_day">Copy whole day</string>
+    <string name="copied_meal">Copied yesterday\'s %1$s</string>
+    <string name="copied_day">Copied all of yesterday</string>
+    <string name="speak_what_you_ate">Speak what you ate</string>
+    <string name="log_by_photo">Log by photo</string>
+    <string name="scan_barcode">Scan a barcode</string>
+    <string name="ask_about_food">Ask about your food</string>
+    <string name="vitamins_link">Vitamins &amp; minerals</string>
+
+    <!-- Profile -->
+    <string name="profile_title_new">Let\'s set your daily goal</string>
+    <string name="profile_title_edit">Profile &amp; goal</string>
+    <string name="profile_intro">We use these to work out how many calories and how much protein you need each day.</string>
+    <string name="age">Age</string>
+    <string name="sex">Sex</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="height">Height</string>
+    <string name="weight">Weight</string>
+    <string name="years">years</string>
+    <string name="cm">cm</string>
+    <string name="kg">kg</string>
+    <string name="how_active">How active are you?</string>
+    <string name="your_goal">Your goal</string>
+    <string name="daily_target">Your daily target</string>
+    <string name="continue_">Continue</string>
+    <string name="error_age">Enter an age from 13 to 100</string>
+    <string name="error_height">Enter height in cm (100–230)</string>
+    <string name="error_weight">Enter weight in kg (30–300)</string>
+    <string name="activity_sedentary">Desk job</string>
+    <string name="activity_light">Lightly active</string>
+    <string name="activity_moderate">Active</string>
+    <string name="activity_very">Very active</string>
+    <string name="goal_lose">Lose weight</string>
+    <string name="goal_maintain">Maintain</string>
+    <string name="goal_gain">Gain muscle</string>
+    <string name="settings">Settings</string>
+
+    <!-- Log a meal -->
+    <string name="log_meal_title">Log a meal</string>
+    <string name="check_before_saving">Check before saving</string>
+    <string name="listening">Listening…</string>
+    <string name="tap_mic_hint">Tap the mic and say what you ate</string>
+    <string name="transcript_example">e.g. \"Two roti, a bowl of dal and some salad for lunch\"</string>
+    <string name="tip_amount">Tip: include the meal and amount, e.g. \"for dinner, 150 g paneer\"</string>
+    <string name="working_out">Working out calories…</string>
+    <string name="this_meal">This meal</string>
+    <string name="save_favourite">Save as a favourite meal</string>
+    <string name="favourite_name">Name</string>
+    <string name="favourite_placeholder">My %1$s</string>
+    <string name="type_more">Type more</string>
+    <string name="say_more">Say more</string>
+    <string name="add_to_meal">Add %1$s kcal to %2$s</string>
+    <string name="type_what_you_ate">Type what you ate</string>
+    <string name="start_speaking">Start speaking</string>
+    <string name="done_speaking">Done speaking</string>
+    <string name="which_meal">Which meal is this?</string>
+    <string name="which_meal_hint">You didn\'t say. We think it\'s %1$s.</string>
+    <string name="suggested">Suggested</string>
+    <string name="always_pick">Always pick by time of day, don\'t ask</string>
+    <string name="change_meal">Change meal</string>
+    <string name="edit_item">Edit %1$s</string>
+    <string name="item_line">%1$s %2$s · %3$s g · %4$s</string>
+    <string name="learned_portion">Your %2$s of %1$s is about %3$s g. We\'ll use that from now on.</string>
+    <string name="photo_estimate_note">Portions from photos are estimates. Check each amount.</string>
+
+    <!-- Errors -->
+    <string name="err_no_speech">I didn\'t hear anything. Tap the mic and try again.</string>
+    <string name="err_no_food">I didn\'t catch any food in that. Try something like \"two roti and a bowl of dal\".</string>
+    <string name="err_network">Couldn\'t connect. Check your internet and try again.</string>
+    <string name="err_refused">That couldn\'t be processed. Try describing it differently.</string>
+    <string name="err_too_long">That was too long. Try one meal at a time.</string>
+    <string name="err_bad_reply">Something went wrong reading the reply. Please try again.</string>
+    <string name="err_not_configured">The food service isn\'t set up yet. Add GEMINI_API_KEY to local.properties (free key from aistudio.google.com).</string>
+    <string name="err_mic_permission">Microphone permission is needed to log by voice.</string>
+    <string name="err_speech_unavailable">Speech recognition isn\'t available on this phone. Type instead.</string>
+    <string name="err_barcode_not_found">This product isn\'t in the database yet. Try a photo of the plate or type it.</string>
+    <string name="err_invalid_backup">That isn\'t a MyCalories backup file.</string>
+    <string name="err_bad_key">The API key was rejected. Check GEMINI_API_KEY in local.properties: it should be your full key from aistudio.google.com, starting with AIza.</string>
+    <string name="err_no_credit">Your Anthropic account has no credits. Add credits in the Anthropic Console under Settings → Billing, then try again.</string>
+    <string name="err_busy">The food service is busy right now. Please try again in a minute.</string>
+    <string name="err_free_limit">You\'ve reached the free limit for now. Please try again in a minute, or tomorrow if it keeps happening.</string>
+    <string name="err_model_unavailable">That AI model isn\'t available. Remove GEMINI_MODEL from local.properties to use the default.</string>
+    <string name="err_generic">Something went wrong. Please try again.</string>
+
+    <!-- Portion editor -->
+    <string name="how_much">How much did you have?</string>
+    <string name="for_this_amount">For this amount</string>
+    <string name="less">Less</string>
+    <string name="more">More</string>
+    <string name="remove">Remove</string>
+    <string name="source_line">Source: %1$s</string>
+    <string name="unit_approx_grams">%1$s ≈ %2$s g</string>
+
+    <!-- Meal detail -->
+    <string name="items_tap_to_edit">%1$d items · tap to edit</string>
+    <string name="nothing_logged_meal">Nothing logged for %1$s.</string>
+    <string name="add_food">Add food</string>
+    <string name="repeat_tomorrow">Repeat tomorrow</string>
+    <string name="move_to">Move to %1$s</string>
+    <string name="also_line">Also: sugar %1$s g · sodium %2$s mg</string>
+    <string name="removed">Removed %1$s</string>
+    <string name="moved">Moved to %1$s</string>
+    <string name="copied_tomorrow">Copied to tomorrow</string>
+
+    <!-- History -->
+    <string name="history_title">History</string>
+    <string name="daily_average_7">Daily average, last 7 days</string>
+    <string name="dashed_goal">Dashed line: goal %1$s kcal</string>
+    <string name="logging_streak">Logging streak</string>
+    <string name="days_count">%1$d days</string>
+    <string name="avg_protein">Avg protein</string>
+    <string name="avg_fiber">Avg fiber</string>
+    <string name="short_of_goal">%1$d g short of goal</string>
+    <string name="goal_met">Goal met</string>
+    <string name="weekly_summary_link">Weekly summary</string>
+    <string name="weight_link">Weight &amp; goal</string>
+    <string name="calories_per_day">Calories per day: %1$s</string>
+
+    <!-- Foods -->
+    <string name="my_foods">My foods</string>
+    <string name="search_foods">Search foods</string>
+    <string name="saved_meals_header">Saved meals · one tap to log</string>
+    <string name="library_header">Food library · per serving</string>
+    <string name="results">Results</string>
+    <string name="no_foods">No foods found. Log it by voice and it will be saved here.</string>
+    <string name="log_x">Log %1$s</string>
+    <string name="delete_x">Delete %1$s</string>
+    <string name="add_to">Add to %1$s</string>
+    <string name="added_to">Added %1$s to %2$s</string>
+    <string name="serving_line">1 %1$s · %2$s g · %3$s</string>
+    <string name="new_recipe">New recipe by voice</string>
+
+    <!-- Recipe -->
+    <string name="new_recipe_title">New recipe</string>
+    <string name="recipe_hint">Say the recipe name, every ingredient with its amount, and how many bowls it makes.</string>
+    <string name="recipe_example">e.g. \"Mom\'s dal: one cup toor dal, two tablespoons ghee, one onion, one tomato. Makes four bowls.\"</string>
+    <string name="recipe_name">Recipe name</string>
+    <string name="makes">Makes</string>
+    <string name="servings_value">%1$d %2$s</string>
+    <string name="fewer_servings">Fewer servings</string>
+    <string name="more_servings">More servings</string>
+    <string name="per_serving">Per %1$s</string>
+    <string name="save_recipe">Save recipe</string>
+    <string name="whole_recipe">Whole recipe</string>
+
+    <!-- Weight -->
+    <string name="weight_title">Weight</string>
+    <string name="log_weight">Log weight</string>
+    <string name="weight_now">Now</string>
+    <string name="target">Target</string>
+    <string name="set_target">Set target</string>
+    <string name="per_week">%1$s kg per week</string>
+    <string name="reach_target">At this pace you reach %1$s kg around %2$s.</string>
+    <string name="adjust_title">Adjust your daily goal?</string>
+    <string name="adjust_text">Your weight is changing about %1$s kg a week, which is off your plan. A daily goal of %2$d kcal would bring you back on pace.</string>
+    <string name="keep_goal">Keep %1$d</string>
+    <string name="update_goal">Update goal</string>
+    <string name="weight_kg_hint">Weight in kg</string>
+    <string name="weights_from_scale">Weight also comes in from smart scales through Health Connect.</string>
+    <string name="weight_chart_desc">Weight over time, latest %1$s kg</string>
+    <string name="no_weights">Log your weight once a week to see your trend.</string>
+
+    <!-- Weekly -->
+    <string name="your_week">Your week</string>
+    <string name="avg_per_day">Avg / day</string>
+    <string name="on_target">On target</string>
+    <string name="x_of_y">%1$d of %2$d</string>
+    <string name="to_work_on">TO WORK ON</string>
+    <string name="protein_low">Protein was low on %1$d of 7 days</string>
+    <string name="protein_avg_line">You averaged %1$d g against a %2$d g goal. Easy ways to add more:</string>
+    <string name="tip_line">%1$s (+%2$d g)</string>
+    <string name="went_well">WENT WELL</string>
+    <string name="fiber_up">Fiber up %1$s g a day compared with last week</string>
+    <string name="streak_line">Logged %1$d days in a row</string>
+    <string name="water_line">Water goal met on %1$d days</string>
+    <string name="ask_week">Ask a question about my week</string>
+    <string name="no_week_data">Log a few days to see your weekly summary.</string>
+
+    <!-- Ask -->
+    <string name="ask_title">Ask</string>
+    <string name="ask_subtitle">Answers use your logged meals and goal</string>
+    <string name="ask_placeholder">Ask anything about your food</string>
+    <string name="suggestion_dinner">What should I eat for dinner to hit my protein?</string>
+    <string name="suggestion_over">Why am I over today?</string>
+    <string name="suggestion_snack">Healthy snack under 150 kcal</string>
+    <string name="thinking">Thinking…</string>
+
+    <!-- Micros -->
+    <string name="micros_title">Vitamins &amp; minerals</string>
+    <string name="week_avg_tab">7-day average</string>
+    <string name="low">Low</string>
+    <string name="over">Over</string>
+    <string name="micro_value">%1$s / %2$s %3$s</string>
+    <string name="low_week_title">Low all week: %1$s</string>
+    <string name="micros_note">Estimates from your logged food. Talk to a doctor before taking supplements.</string>
+    <string name="help_iron">Iron: green leafy sabzi, rajma, chana, jaggery, eggs.</string>
+    <string name="help_calcium">Calcium: milk, curd, paneer, ragi.</string>
+    <string name="help_b12">Vitamin B12: milk, curd, eggs, paneer, fish.</string>
+    <string name="help_vitd">Vitamin D: eggs, fish, fortified milk, and morning sunlight.</string>
+    <string name="help_vitc">Vitamin C: amla, guava, oranges, lemon, tomatoes.</string>
+    <string name="help_potassium">Potassium: banana, coconut water, potatoes, dal.</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="reminders">REMINDERS</string>
+    <string name="meal_reminders">Meal reminders</string>
+    <string name="meal_reminders_sub">Learns your usual meal times</string>
+    <string name="water_reminders">Water reminders</string>
+    <string name="water_reminders_sub">Every 2 hours, 9 AM – 9 PM</string>
+    <string name="connected">CONNECTED</string>
+    <string name="health_connect">Health Connect</string>
+    <string name="hc_connected">Connected · steps, workouts, weight</string>
+    <string name="hc_connect">Tap to connect steps, workouts and weight</string>
+    <string name="hc_unavailable">Not available on this phone</string>
+    <string name="hc_update">Update Health Connect from the Play Store to connect</string>
+    <string name="backup_title">Backup</string>
+    <string name="backup_auto_sub">Android backs up your diary to your Google account. You can also save a backup file.</string>
+    <string name="appearance">APPEARANCE</string>
+    <string name="theme">Theme</string>
+    <string name="theme_system">System</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="language">Language</string>
+    <string name="english">English</string>
+    <string name="hindi">हिन्दी</string>
+    <string name="export_data">Export my data</string>
+    <string name="privacy_data">Privacy &amp; data</string>
+    <string name="edit_profile">Profile &amp; goal</string>
+
+    <!-- Export -->
+    <string name="export_title">Export my data</string>
+    <string name="dates">Dates</string>
+    <string name="last_7">Last 7 days</string>
+    <string name="last_30">Last 30 days</string>
+    <string name="all_time">All time</string>
+    <string name="format">Format</string>
+    <string name="pdf_report">PDF report</string>
+    <string name="csv_sheet">CSV spreadsheet</string>
+    <string name="include">Include</string>
+    <string name="meals_and_foods">Meals and foods</string>
+    <string name="daily_totals">Daily totals and weight</string>
+    <string name="preview">PREVIEW</string>
+    <string name="preview_line">Average %1$s kcal · Protein %2$s g · %3$d days logged</string>
+    <string name="save_to_phone">Save to phone</string>
+    <string name="share">Share…</string>
+    <string name="pdf_title">Food diary</string>
+
+    <!-- Privacy -->
+    <string name="privacy_title">Privacy &amp; data</string>
+    <string name="stays_on_phone">Stays on your phone</string>
+    <string name="stays_text">Your food diary, weight, profile, recipes and saved meals. Android backs them up only to your own Google account.</string>
+    <string name="sent_title">Sent only to work out calories</string>
+    <string name="sent_text">What you say or type, and plate photos, go to Google Gemini to find the foods. On Gemini\'s free tier, Google may use them to improve its products. Plain food names go to USDA, and barcodes to Open Food Facts. Your name and email are never sent.</string>
+    <string name="server_note">Avoid photos with faces or anything private in them. Turn off photo logging below if you prefer.</string>
+    <string name="allow_photos">Allow photo logging</string>
+    <string name="keep_transcript">Keep what I said</string>
+    <string name="keep_transcript_sub">Saves your words next to each food</string>
+    <string name="download_backup">Save a backup file</string>
+    <string name="restore_backup">Restore from a backup file</string>
+    <string name="delete_all">Delete all my data…</string>
+    <string name="delete_note">Deleting asks you to confirm and can\'t be undone.</string>
+    <string name="confirm_delete_title">Delete everything?</string>
+    <string name="confirm_delete_text">This permanently deletes your food diary, weights, recipes, saved meals and profile from this phone. It can\'t be undone.</string>
+    <string name="deleted_done">All your data was deleted.</string>
+    <string name="restored_done">Backup restored.</string>
+    <string name="backup_saved">Backup saved.</string>
+
+    <!-- Notifications and widget -->
+    <string name="notif_channel">Meal and water reminders</string>
+    <string name="notif_meal_title">%1$s isn\'t logged yet</string>
+    <string name="notif_meal_text">Tap to say what you ate.</string>
+    <string name="notif_water_title">Time for a glass of water</string>
+    <string name="notif_water_text">%1$d of %2$d glasses today</string>
+    <string name="widget_macros">P %1$d · C %2$d · F %3$d g</string>
+    <string name="widget_speak">Speak</string>
+    <string name="widget_description">Calories left today, and a button to log by voice</string>
+</resources>

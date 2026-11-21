@@ -1,0 +1,364 @@
+<resources>
+    <string name="app_name">MyCalories</string>
+
+    <!-- सामान्य -->
+    <string name="back">वापस</string>
+    <string name="close">बंद करें</string>
+    <string name="save">सेव करें</string>
+    <string name="cancel">रद्द करें</string>
+    <string name="delete">हटाएँ</string>
+    <string name="undo">पहले जैसा करें</string>
+    <string name="more_options">और विकल्प</string>
+    <string name="today">आज</string>
+    <string name="kcal_left">kcal बाकी</string>
+    <string name="kcal_over">kcal ज़्यादा</string>
+    <string name="kcal_value">%1$s kcal</string>
+    <string name="grams_value">%1$s ग्राम</string>
+    <string name="try_again">फिर से कोशिश करें</string>
+    <string name="type_instead">लिखकर बताएँ</string>
+    <string name="send">भेजें</string>
+
+    <!-- भोजन -->
+    <string name="meal_breakfast">नाश्ता</string>
+    <string name="meal_lunch">दोपहर का खाना</string>
+    <string name="meal_snack">स्नैक</string>
+    <string name="meal_dinner">रात का खाना</string>
+
+    <!-- नेविगेशन -->
+    <string name="nav_today">आज</string>
+    <string name="nav_history">इतिहास</string>
+    <string name="nav_foods">खाने</string>
+    <string name="nav_profile">प्रोफ़ाइल</string>
+
+    <!-- पोषक तत्व -->
+    <string name="protein">प्रोटीन</string>
+    <string name="carbs">कार्ब्स</string>
+    <string name="fat">वसा</string>
+    <string name="fiber">फाइबर</string>
+    <string name="macro_of_goal">%1$d/%2$dg</string>
+    <string name="g_protein">%1$sg प्रोटीन</string>
+    <string name="g_carbs">%1$sg कार्ब्स</string>
+    <string name="g_fat">%1$sg वसा</string>
+    <string name="g_fiber">%1$sg फाइबर</string>
+    <string name="short_macros">प्रो %1$s · का %2$s · व %3$s</string>
+    <string name="iron">आयरन</string>
+    <string name="calcium">कैल्शियम</string>
+    <string name="vitamin_b12">विटामिन B12</string>
+    <string name="vitamin_d">विटामिन D</string>
+    <string name="vitamin_c">विटामिन C</string>
+    <string name="potassium">पोटैशियम</string>
+    <string name="sodium">सोडियम</string>
+
+    <!-- स्रोत -->
+    <string name="source_local">फ़ोन में</string>
+    <string name="source_recipe">मेरी रेसिपी</string>
+    <string name="source_usda">ऑनलाइन · USDA</string>
+    <string name="source_estimate">अनुमान</string>
+    <string name="source_packaged">पैकेट का लेबल</string>
+    <string name="please_check">कृपया जाँचें</string>
+
+    <!-- इकाइयाँ -->
+    <string name="unit_piece">पीस</string>
+    <string name="unit_bowl">कटोरा</string>
+    <string name="unit_katori">कटोरी</string>
+    <string name="unit_cup">कप</string>
+    <string name="unit_tbsp">बड़ा चम्मच</string>
+    <string name="unit_tsp">छोटा चम्मच</string>
+    <string name="unit_g">ग्राम</string>
+    <string name="unit_glass">गिलास</string>
+    <string name="unit_plate">प्लेट</string>
+    <string name="unit_slice">स्लाइस</string>
+    <string name="unit_serving">सर्विंग</string>
+
+    <!-- आज -->
+    <string name="goal">लक्ष्य</string>
+    <string name="eaten">खाया</string>
+    <string name="burned">जलाई</string>
+    <string name="water_glasses">%1$d गिलास</string>
+    <string name="add_water">एक गिलास पानी जोड़ें</string>
+    <string name="remove_water">एक गिलास पानी हटाएँ</string>
+    <string name="previous_day">पिछला दिन</string>
+    <string name="next_day">अगला दिन</string>
+    <string name="not_logged_yet">अभी दर्ज नहीं किया</string>
+    <string name="add_meal">%1$s जोड़ें</string>
+    <string name="steps_line">%1$s कदम · Health Connect से</string>
+    <string name="quick_add_title">कल वाला जल्दी जोड़ें</string>
+    <string name="same_meal">कल जैसा %1$s · %2$d</string>
+    <string name="copy_whole_day">पूरा दिन कॉपी करें</string>
+    <string name="copied_meal">कल का %1$s कॉपी किया</string>
+    <string name="copied_day">कल का पूरा दिन कॉपी किया</string>
+    <string name="speak_what_you_ate">बोलकर बताएँ क्या खाया</string>
+    <string name="log_by_photo">फ़ोटो से दर्ज करें</string>
+    <string name="scan_barcode">बारकोड स्कैन करें</string>
+    <string name="ask_about_food">अपने खाने के बारे में पूछें</string>
+    <string name="vitamins_link">विटामिन और मिनरल</string>
+
+    <!-- प्रोफ़ाइल -->
+    <string name="profile_title_new">आइए आपका रोज़ का लक्ष्य तय करें</string>
+    <string name="profile_title_edit">प्रोफ़ाइल और लक्ष्य</string>
+    <string name="profile_intro">इनसे हम पता लगाते हैं कि आपको रोज़ कितनी कैलोरी और कितना प्रोटीन चाहिए।</string>
+    <string name="age">उम्र</string>
+    <string name="sex">लिंग</string>
+    <string name="male">पुरुष</string>
+    <string name="female">महिला</string>
+    <string name="height">लंबाई</string>
+    <string name="weight">वज़न</string>
+    <string name="years">साल</string>
+    <string name="cm">सेमी</string>
+    <string name="kg">किलो</string>
+    <string name="how_active">आप कितने सक्रिय हैं?</string>
+    <string name="your_goal">आपका लक्ष्य</string>
+    <string name="daily_target">आपका रोज़ का लक्ष्य</string>
+    <string name="continue_">आगे बढ़ें</string>
+    <string name="error_age">13 से 100 के बीच उम्र लिखें</string>
+    <string name="error_height">लंबाई सेमी में लिखें (100–230)</string>
+    <string name="error_weight">वज़न किलो में लिखें (30–300)</string>
+    <string name="activity_sedentary">बैठकर काम</string>
+    <string name="activity_light">थोड़ा सक्रिय</string>
+    <string name="activity_moderate">सक्रिय</string>
+    <string name="activity_very">बहुत सक्रिय</string>
+    <string name="goal_lose">वज़न घटाना</string>
+    <string name="goal_maintain">वज़न बनाए रखना</string>
+    <string name="goal_gain">मसल बढ़ाना</string>
+    <string name="settings">सेटिंग्स</string>
+
+    <!-- खाना दर्ज करें -->
+    <string name="log_meal_title">खाना दर्ज करें</string>
+    <string name="check_before_saving">सेव करने से पहले जाँचें</string>
+    <string name="listening">सुन रहे हैं…</string>
+    <string name="tap_mic_hint">माइक दबाएँ और बताएँ आपने क्या खाया</string>
+    <string name="transcript_example">जैसे \"दोपहर में दो रोटी, एक कटोरा दाल और थोड़ा सलाद\"</string>
+    <string name="tip_amount">सुझाव: खाने का समय और मात्रा बताएँ, जैसे \"रात को 150 ग्राम पनीर\"</string>
+    <string name="working_out">कैलोरी निकाल रहे हैं…</string>
+    <string name="this_meal">यह भोजन</string>
+    <string name="save_favourite">पसंदीदा भोजन के रूप में सेव करें</string>
+    <string name="favourite_name">नाम</string>
+    <string name="favourite_placeholder">मेरा %1$s</string>
+    <string name="type_more">और लिखें</string>
+    <string name="say_more">और बोलें</string>
+    <string name="add_to_meal">%2$s में %1$s kcal जोड़ें</string>
+    <string name="type_what_you_ate">लिखें आपने क्या खाया</string>
+    <string name="start_speaking">बोलना शुरू करें</string>
+    <string name="done_speaking">बोलना हो गया</string>
+    <string name="which_meal">यह कौन सा भोजन है?</string>
+    <string name="which_meal_hint">आपने नहीं बताया। हमें लगता है यह %1$s है।</string>
+    <string name="suggested">सुझाया गया</string>
+    <string name="always_pick">हमेशा समय के हिसाब से चुनें, न पूछें</string>
+    <string name="change_meal">भोजन बदलें</string>
+    <string name="edit_item">%1$s बदलें</string>
+    <string name="item_line">%1$s %2$s · %3$s ग्राम · %4$s</string>
+    <string name="learned_portion">आपका एक %2$s %1$s लगभग %3$s ग्राम होता है। अब से यही इस्तेमाल करेंगे।</string>
+    <string name="photo_estimate_note">फ़ोटो से मात्रा का अनुमान लगाया गया है। हर मात्रा जाँच लें।</string>
+
+    <!-- गलतियाँ -->
+    <string name="err_no_speech">कुछ सुनाई नहीं दिया। माइक दबाकर फिर से बोलें।</string>
+    <string name="err_no_food">इसमें कोई खाना समझ नहीं आया। जैसे बोलें \"दो रोटी और एक कटोरा दाल\"।</string>
+    <string name="err_network">कनेक्ट नहीं हो पाया। इंटरनेट जाँचें और फिर से कोशिश करें।</string>
+    <string name="err_refused">यह प्रोसेस नहीं हो पाया। दूसरे तरीके से बताएँ।</string>
+    <string name="err_too_long">यह बहुत लंबा था। एक बार में एक भोजन बताएँ।</string>
+    <string name="err_bad_reply">जवाब पढ़ने में दिक्कत हुई। फिर से कोशिश करें।</string>
+    <string name="err_not_configured">फ़ूड सेवा अभी सेट नहीं है। local.properties में GEMINI_API_KEY जोड़ें (aistudio.google.com से मुफ़्त चाबी)।</string>
+    <string name="err_mic_permission">बोलकर दर्ज करने के लिए माइक की अनुमति चाहिए।</string>
+    <string name="err_speech_unavailable">इस फ़ोन पर बोलकर लिखने की सुविधा नहीं है। लिखकर बताएँ।</string>
+    <string name="err_barcode_not_found">यह प्रोडक्ट अभी डेटाबेस में नहीं है। प्लेट की फ़ोटो लें या लिखकर बताएँ।</string>
+    <string name="err_invalid_backup">यह MyCalories की बैकअप फ़ाइल नहीं है।</string>
+    <string name="err_bad_key">API चाबी स्वीकार नहीं हुई। local.properties में GEMINI_API_KEY जाँचें: यह aistudio.google.com से मिली पूरी चाबी होनी चाहिए, जो AIza से शुरू होती है।</string>
+    <string name="err_no_credit">आपके Anthropic खाते में क्रेडिट नहीं है। Anthropic Console में Settings → Billing में क्रेडिट जोड़ें, फिर से कोशिश करें।</string>
+    <string name="err_busy">फ़ूड सेवा अभी व्यस्त है। एक मिनट बाद फिर से कोशिश करें।</string>
+    <string name="err_free_limit">अभी के लिए मुफ़्त सीमा पूरी हो गई है। एक मिनट बाद फिर कोशिश करें, या बार-बार हो तो कल।</string>
+    <string name="err_model_unavailable">यह AI मॉडल उपलब्ध नहीं है। डिफ़ॉल्ट इस्तेमाल करने के लिए local.properties से GEMINI_MODEL हटा दें।</string>
+    <string name="err_generic">कुछ गड़बड़ हो गई। फिर से कोशिश करें।</string>
+
+    <!-- मात्रा बदलें -->
+    <string name="how_much">आपने कितना खाया?</string>
+    <string name="for_this_amount">इतनी मात्रा में</string>
+    <string name="less">कम</string>
+    <string name="more">ज़्यादा</string>
+    <string name="remove">हटाएँ</string>
+    <string name="source_line">स्रोत: %1$s</string>
+    <string name="unit_approx_grams">%1$s ≈ %2$s ग्राम</string>
+
+    <!-- भोजन का विवरण -->
+    <string name="items_tap_to_edit">%1$d चीज़ें · बदलने के लिए दबाएँ</string>
+    <string name="nothing_logged_meal">%1$s में कुछ दर्ज नहीं है।</string>
+    <string name="add_food">खाना जोड़ें</string>
+    <string name="repeat_tomorrow">कल भी यही</string>
+    <string name="move_to">%1$s में ले जाएँ</string>
+    <string name="also_line">साथ में: चीनी %1$s ग्राम · सोडियम %2$s mg</string>
+    <string name="removed">%1$s हटाया</string>
+    <string name="moved">%1$s में ले गए</string>
+    <string name="copied_tomorrow">कल के लिए कॉपी किया</string>
+
+    <!-- इतिहास -->
+    <string name="history_title">इतिहास</string>
+    <string name="daily_average_7">रोज़ का औसत, पिछले 7 दिन</string>
+    <string name="dashed_goal">डैश वाली रेखा: लक्ष्य %1$s kcal</string>
+    <string name="logging_streak">लगातार दर्ज</string>
+    <string name="days_count">%1$d दिन</string>
+    <string name="avg_protein">औसत प्रोटीन</string>
+    <string name="avg_fiber">औसत फाइबर</string>
+    <string name="short_of_goal">लक्ष्य से %1$d ग्राम कम</string>
+    <string name="goal_met">लक्ष्य पूरा</string>
+    <string name="weekly_summary_link">हफ़्ते का सार</string>
+    <string name="weight_link">वज़न और लक्ष्य</string>
+    <string name="calories_per_day">रोज़ की कैलोरी: %1$s</string>
+
+    <!-- खाने -->
+    <string name="my_foods">मेरे खाने</string>
+    <string name="search_foods">खाना खोजें</string>
+    <string name="saved_meals_header">सेव किए भोजन · एक टैप में दर्ज</string>
+    <string name="library_header">खानों की सूची · एक सर्विंग</string>
+    <string name="results">नतीजे</string>
+    <string name="no_foods">कोई खाना नहीं मिला। बोलकर दर्ज करें, यह यहाँ सेव हो जाएगा।</string>
+    <string name="log_x">%1$s दर्ज करें</string>
+    <string name="delete_x">%1$s हटाएँ</string>
+    <string name="add_to">%1$s में जोड़ें</string>
+    <string name="added_to">%1$s को %2$s में जोड़ा</string>
+    <string name="serving_line">1 %1$s · %2$s ग्राम · %3$s</string>
+    <string name="new_recipe">बोलकर नई रेसिपी</string>
+
+    <!-- रेसिपी -->
+    <string name="new_recipe_title">नई रेसिपी</string>
+    <string name="recipe_hint">रेसिपी का नाम, हर सामग्री और उसकी मात्रा, और कितने कटोरे बनते हैं, बोलें।</string>
+    <string name="recipe_example">जैसे \"मम्मी की दाल: एक कप अरहर दाल, दो बड़े चम्मच घी, एक प्याज़, एक टमाटर। चार कटोरे बनते हैं।\"</string>
+    <string name="recipe_name">रेसिपी का नाम</string>
+    <string name="makes">कितना बनता है</string>
+    <string name="servings_value">%1$d %2$s</string>
+    <string name="fewer_servings">कम सर्विंग</string>
+    <string name="more_servings">ज़्यादा सर्विंग</string>
+    <string name="per_serving">एक %1$s में</string>
+    <string name="save_recipe">रेसिपी सेव करें</string>
+    <string name="whole_recipe">पूरी रेसिपी</string>
+
+    <!-- वज़न -->
+    <string name="weight_title">वज़न</string>
+    <string name="log_weight">वज़न दर्ज करें</string>
+    <string name="weight_now">अभी</string>
+    <string name="target">लक्ष्य</string>
+    <string name="set_target">लक्ष्य तय करें</string>
+    <string name="per_week">हर हफ़्ते %1$s किलो</string>
+    <string name="reach_target">इसी रफ़्तार से आप %2$s के आसपास %1$s किलो तक पहुँचेंगे।</string>
+    <string name="adjust_title">रोज़ का लक्ष्य बदलें?</string>
+    <string name="adjust_text">आपका वज़न हर हफ़्ते लगभग %1$s किलो बदल रहा है, जो योजना से अलग है। रोज़ %2$d kcal का लक्ष्य आपको फिर से सही रफ़्तार पर ले आएगा।</string>
+    <string name="keep_goal">%1$d रहने दें</string>
+    <string name="update_goal">लक्ष्य बदलें</string>
+    <string name="weight_kg_hint">वज़न किलो में</string>
+    <string name="weights_from_scale">स्मार्ट वज़न मशीन से वज़न Health Connect के ज़रिए भी आता है।</string>
+    <string name="weight_chart_desc">समय के साथ वज़न, ताज़ा %1$s किलो</string>
+    <string name="no_weights">अपना ट्रेंड देखने के लिए हफ़्ते में एक बार वज़न दर्ज करें।</string>
+
+    <!-- हफ़्ता -->
+    <string name="your_week">आपका हफ़्ता</string>
+    <string name="avg_per_day">औसत / दिन</string>
+    <string name="on_target">लक्ष्य पर</string>
+    <string name="x_of_y">%2$d में से %1$d</string>
+    <string name="to_work_on">सुधारने लायक</string>
+    <string name="protein_low">7 में से %1$d दिन प्रोटीन कम रहा</string>
+    <string name="protein_avg_line">आपका औसत %1$d ग्राम रहा, लक्ष्य %2$d ग्राम है। ज़्यादा पाने के आसान तरीके:</string>
+    <string name="tip_line">%1$s (+%2$d ग्राम)</string>
+    <string name="went_well">अच्छा रहा</string>
+    <string name="fiber_up">पिछले हफ़्ते से रोज़ %1$s ग्राम ज़्यादा फाइबर</string>
+    <string name="streak_line">लगातार %1$d दिन दर्ज किया</string>
+    <string name="water_line">%1$d दिन पानी का लक्ष्य पूरा हुआ</string>
+    <string name="ask_week">अपने हफ़्ते के बारे में पूछें</string>
+    <string name="no_week_data">हफ़्ते का सार देखने के लिए कुछ दिन खाना दर्ज करें।</string>
+
+    <!-- पूछें -->
+    <string name="ask_title">पूछें</string>
+    <string name="ask_subtitle">जवाब आपके दर्ज खाने और लक्ष्य पर आधारित हैं</string>
+    <string name="ask_placeholder">अपने खाने के बारे में कुछ भी पूछें</string>
+    <string name="suggestion_dinner">प्रोटीन पूरा करने के लिए रात में क्या खाऊँ?</string>
+    <string name="suggestion_over">आज मैं ज़्यादा क्यों खा गया?</string>
+    <string name="suggestion_snack">150 kcal से कम का हेल्दी स्नैक</string>
+    <string name="thinking">सोच रहे हैं…</string>
+
+    <!-- विटामिन -->
+    <string name="micros_title">विटामिन और मिनरल</string>
+    <string name="week_avg_tab">7 दिन का औसत</string>
+    <string name="low">कम</string>
+    <string name="over">ज़्यादा</string>
+    <string name="micro_value">%1$s / %2$s %3$s</string>
+    <string name="low_week_title">पूरे हफ़्ते कम: %1$s</string>
+    <string name="micros_note">यह आपके दर्ज खाने से अनुमान है। सप्लीमेंट लेने से पहले डॉक्टर से बात करें।</string>
+    <string name="help_iron">आयरन: हरी पत्तेदार सब्ज़ी, राजमा, चना, गुड़, अंडे।</string>
+    <string name="help_calcium">कैल्शियम: दूध, दही, पनीर, रागी।</string>
+    <string name="help_b12">विटामिन B12: दूध, दही, अंडे, पनीर, मछली।</string>
+    <string name="help_vitd">विटामिन D: अंडे, मछली, फ़ोर्टिफ़ाइड दूध, और सुबह की धूप।</string>
+    <string name="help_vitc">विटामिन C: आँवला, अमरूद, संतरा, नींबू, टमाटर।</string>
+    <string name="help_potassium">पोटैशियम: केला, नारियल पानी, आलू, दाल।</string>
+
+    <!-- सेटिंग्स -->
+    <string name="settings_title">सेटिंग्स</string>
+    <string name="reminders">रिमाइंडर</string>
+    <string name="meal_reminders">भोजन रिमाइंडर</string>
+    <string name="meal_reminders_sub">आपके खाने का सामान्य समय सीखता है</string>
+    <string name="water_reminders">पानी रिमाइंडर</string>
+    <string name="water_reminders_sub">हर 2 घंटे, सुबह 9 – रात 9</string>
+    <string name="connected">जुड़े हुए</string>
+    <string name="health_connect">Health Connect</string>
+    <string name="hc_connected">जुड़ा है · कदम, वर्कआउट, वज़न</string>
+    <string name="hc_connect">कदम, वर्कआउट और वज़न जोड़ने के लिए दबाएँ</string>
+    <string name="hc_unavailable">इस फ़ोन पर उपलब्ध नहीं</string>
+    <string name="hc_update">जोड़ने के लिए Play Store से Health Connect अपडेट करें</string>
+    <string name="backup_title">बैकअप</string>
+    <string name="backup_auto_sub">Android आपकी डायरी का बैकअप आपके Google खाते में रखता है। आप बैकअप फ़ाइल भी सेव कर सकते हैं।</string>
+    <string name="appearance">दिखावट</string>
+    <string name="theme">थीम</string>
+    <string name="theme_system">सिस्टम</string>
+    <string name="theme_light">लाइट</string>
+    <string name="theme_dark">डार्क</string>
+    <string name="language">भाषा</string>
+    <string name="english">English</string>
+    <string name="hindi">हिन्दी</string>
+    <string name="export_data">मेरा डेटा निकालें</string>
+    <string name="privacy_data">निजता और डेटा</string>
+    <string name="edit_profile">प्रोफ़ाइल और लक्ष्य</string>
+
+    <!-- एक्सपोर्ट -->
+    <string name="export_title">मेरा डेटा निकालें</string>
+    <string name="dates">तारीखें</string>
+    <string name="last_7">पिछले 7 दिन</string>
+    <string name="last_30">पिछले 30 दिन</string>
+    <string name="all_time">शुरू से अब तक</string>
+    <string name="format">फ़ॉर्मैट</string>
+    <string name="pdf_report">PDF रिपोर्ट</string>
+    <string name="csv_sheet">CSV स्प्रेडशीट</string>
+    <string name="include">शामिल करें</string>
+    <string name="meals_and_foods">भोजन और खाने</string>
+    <string name="daily_totals">रोज़ का कुल और वज़न</string>
+    <string name="preview">झलक</string>
+    <string name="preview_line">औसत %1$s kcal · प्रोटीन %2$s ग्राम · %3$d दिन दर्ज</string>
+    <string name="save_to_phone">फ़ोन में सेव करें</string>
+    <string name="share">शेयर करें…</string>
+    <string name="pdf_title">फ़ूड डायरी</string>
+
+    <!-- निजता -->
+    <string name="privacy_title">निजता और डेटा</string>
+    <string name="stays_on_phone">आपके फ़ोन में रहता है</string>
+    <string name="stays_text">आपकी फ़ूड डायरी, वज़न, प्रोफ़ाइल, रेसिपी और सेव किए भोजन। Android इनका बैकअप सिर्फ़ आपके अपने Google खाते में रखता है।</string>
+    <string name="sent_title">सिर्फ़ कैलोरी निकालने के लिए भेजा जाता है</string>
+    <string name="sent_text">आप जो बोलते या लिखते हैं, और प्लेट की फ़ोटो, खाना पहचानने के लिए Google Gemini को जाती हैं। Gemini के मुफ़्त प्लान में Google इनका इस्तेमाल अपने प्रोडक्ट सुधारने के लिए कर सकता है। सादे खानों के नाम USDA को, और बारकोड Open Food Facts को जाते हैं। आपका नाम और ईमेल कभी नहीं भेजा जाता।</string>
+    <string name="server_note">ऐसी फ़ोटो न लें जिनमें चेहरे या कोई निजी चीज़ हो। चाहें तो नीचे फ़ोटो से दर्ज करना बंद कर दें।</string>
+    <string name="allow_photos">फ़ोटो से दर्ज करने दें</string>
+    <string name="keep_transcript">मैंने जो कहा वह रखें</string>
+    <string name="keep_transcript_sub">हर खाने के साथ आपके शब्द सेव करता है</string>
+    <string name="download_backup">बैकअप फ़ाइल सेव करें</string>
+    <string name="restore_backup">बैकअप फ़ाइल से वापस लाएँ</string>
+    <string name="delete_all">मेरा सारा डेटा हटाएँ…</string>
+    <string name="delete_note">हटाने से पहले पुष्टि माँगी जाएगी, और इसे वापस नहीं लाया जा सकता।</string>
+    <string name="confirm_delete_title">सब कुछ हटाएँ?</string>
+    <string name="confirm_delete_text">इससे आपकी फ़ूड डायरी, वज़न, रेसिपी, सेव किए भोजन और प्रोफ़ाइल इस फ़ोन से हमेशा के लिए हट जाएँगे। इसे वापस नहीं लाया जा सकता।</string>
+    <string name="deleted_done">आपका सारा डेटा हटा दिया गया।</string>
+    <string name="restored_done">बैकअप वापस आ गया।</string>
+    <string name="backup_saved">बैकअप सेव हो गया।</string>
+
+    <!-- सूचनाएँ और विजेट -->
+    <string name="notif_channel">भोजन और पानी रिमाइंडर</string>
+    <string name="notif_meal_title">%1$s अभी दर्ज नहीं हुआ</string>
+    <string name="notif_meal_text">दबाकर बताएँ आपने क्या खाया।</string>
+    <string name="notif_water_title">पानी पीने का समय</string>
+    <string name="notif_water_text">आज %2$d में से %1$d गिलास</string>
+    <string name="widget_macros">प्रो %1$d · का %2$d · व %3$d ग्राम</string>
+    <string name="widget_speak">बोलें</string>
+    <string name="widget_description">आज बची कैलोरी, और बोलकर दर्ज करने का बटन</string>
+</resources>
