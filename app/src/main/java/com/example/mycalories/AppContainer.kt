@@ -43,6 +43,7 @@ import com.example.mycalories.platform.WorkManagerReminderScheduler
 import com.example.mycalories.voice.AndroidVoiceInput
 import com.example.mycalories.voice.VoiceInput
 import io.ktor.client.HttpClient
+import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.engine.okhttp.OkHttp
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
@@ -79,7 +80,14 @@ class AppContainer(context: Context) {
     val data: DataManager = RoomDataManager(db, profiles) { settingsRepo.clear() }
     val pdf = AndroidPdfMaker()
 
-    private val http = HttpClient(OkHttp)
+    private val http = HttpClient(OkHttp) {
+        // AI replies can take a while, especially on the free tier.
+        install(HttpTimeout) {
+            connectTimeoutMillis = 15_000
+            socketTimeoutMillis = 60_000
+            requestTimeoutMillis = 60_000
+        }
+    }
     private val ai: AiTransport = when (val c = AiConfig.choose(
         BuildConfig.GEMINI_API_KEY, BuildConfig.GEMINI_MODEL,
         BuildConfig.ANTHROPIC_API_KEY, BuildConfig.CLAUDE_PROXY_URL, BuildConfig.CLAUDE_PROXY_TOKEN,

@@ -330,4 +330,15 @@ class LogMealViewModelTest {
         vm.learnedShown()
         assertNull(vm.state.value.learned)
     }
+
+    @Test
+    fun `switching to typing stops listening so a silent mic can't show an error`() = runTest {
+        val vm = vm()
+        vm.startListening()
+        vm.cancelListening()
+        assertEquals(1, voice.stopped)
+        assertEquals(Stage.Idle, vm.state.value.stage)
+        voice.events.emit(VoiceEvent.Error(AppError.NO_SPEECH))
+        assertEquals("late voice events are ignored", Stage.Idle, vm.state.value.stage)
+    }
 }

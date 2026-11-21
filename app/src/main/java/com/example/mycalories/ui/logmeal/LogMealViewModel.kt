@@ -99,6 +99,14 @@ class LogMealViewModel(
 
     fun stopListening() = voice.stop()
 
+    /** The user chose to type instead: stop the mic and ignore anything it still reports. */
+    fun cancelListening() {
+        listenJob?.cancel()
+        listenJob = null
+        voice.stop()
+        _state.update { if (it.stage == Stage.Listening) it.copy(stage = if (it.items.isEmpty()) Stage.Idle else Stage.Review) else it }
+    }
+
     /** Typed input, or "say more" by keyboard. */
     fun submitText(text: String) {
         appending = _state.value.stage == Stage.Review && _state.value.items.isNotEmpty()

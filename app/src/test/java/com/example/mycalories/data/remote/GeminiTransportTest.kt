@@ -165,4 +165,25 @@ class GeminiTransportTest {
         assertEquals(AppError.BAD_KEY, e.error)
         assertEquals(1, calls)
     }
+
+    @Test
+    fun `a timeout tries the other model`() = runTest {
+        val urls = mutableListOf<String>()
+        val t = GeminiTransport(
+            HttpClient(MockEngine { req ->
+                urls += req.url.toString()
+                if (urls.size == 1) throw java.net.SocketTimeoutException("slow")
+                respond(okReply("{\"meal\":null,\"items\":[]}"), HttpStatusCode.OK, jsonHeaders)
+            }),
+            apiKey = "AQ.KEY", model = "gemini-3.5-flash-lite", fallbackModel = "gemini-3.8-flash",
+        )
+        assertEquals("end_turn", t.send(request).stopReason)
+        assertTrue(urls[1].contains("gemini-3.8-flash"))
+    }
+
+    @Test
+    fun `defaults use the fast model first`() {
+        assertEquals("gemini-3.5-flash-lite", AiConfig.DEFAULT_GEMINI_MODEL)
+        assertEquals("gemini-3.8-flash", AiConfig.FALLBACK_GEMINI_MODEL)
+    }
 }

@@ -9,7 +9,7 @@ plugins {
 
 // API keys live in local.properties (never committed):
 //   GEMINI_API_KEY=AIza...   (free tier, from aistudio.google.com; used first when set)
-//   GEMINI_MODEL=gemini-3.8-flash   (optional)
+//   GEMINI_MODEL=gemini-3.5-flash-lite   (optional, this is the default)
 //   ANTHROPIC_API_KEY=sk-ant-...   (optional, Claude instead of Gemini)
 //   USDA_API_KEY=...        (optional, falls back to the rate-limited DEMO_KEY)
 val localProps = Properties().apply {

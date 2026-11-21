@@ -204,7 +204,7 @@ class ApiErrorsTest {
     @Test
     fun `network problems stay network errors`() {
         assertEquals(AppError.NETWORK, ApiErrors.forThrowable(java.net.UnknownHostException("x")))
-        assertEquals(AppError.NETWORK, ApiErrors.forThrowable(java.net.SocketTimeoutException("x")))
+        assertEquals("a slow reply means busy, not offline", AppError.BUSY, ApiErrors.forThrowable(java.net.SocketTimeoutException("x")))
         assertEquals(AppError.GENERIC, ApiErrors.forThrowable(IllegalStateException("x")))
     }
 }

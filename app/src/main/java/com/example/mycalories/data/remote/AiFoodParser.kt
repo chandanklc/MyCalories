@@ -180,9 +180,10 @@ sealed interface AiConfig {
     data object None : AiConfig
 
     companion object {
-        const val DEFAULT_GEMINI_MODEL = "gemini-3.8-flash"
-        /** Tried when the main model is busy; lighter and usually has room on the free tier. */
-        const val FALLBACK_GEMINI_MODEL = "gemini-3.5-flash-lite"
+        /** Fast, with the most free requests a day; plenty for picking foods out of a sentence or photo. */
+        const val DEFAULT_GEMINI_MODEL = "gemini-3.5-flash-lite"
+        /** Tried when the main model is busy or slow. */
+        const val FALLBACK_GEMINI_MODEL = "gemini-3.8-flash"
 
         fun choose(geminiKey: String, geminiModel: String, anthropicKey: String, proxyUrl: String, proxyToken: String): AiConfig = when {
             looksLikeGeminiKey(geminiKey) -> Gemini(geminiKey.trim(), geminiModel.trim().ifBlank { DEFAULT_GEMINI_MODEL })
@@ -224,6 +225,8 @@ object ApiErrors {
 
     fun forThrowable(e: Throwable): AppError = when {
         e is FoodParserException -> e.error
+        // Connected but no answer in time: the service is busy, the phone is online.
+        generateSequence(e) { it.cause }.any { it is java.net.SocketTimeoutException || it.javaClass.simpleName.contains("Timeout") } -> AppError.BUSY
         generateSequence(e) { it.cause }.any { it is java.io.IOException } -> AppError.NETWORK
         else -> AppError.GENERIC
     }

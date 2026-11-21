@@ -146,7 +146,7 @@ fun LogMealRoute(viewModel: LogMealViewModel, onClose: () -> Unit, start: LogSta
 
     LogMealScreen(
         state = state, typing = typing,
-        onListen = listen, onStop = viewModel::stopListening, onType = { typing = true },
+        onListen = listen, onStop = viewModel::stopListening, onType = { viewModel.cancelListening(); typing = true },
         onSubmitText = { typing = false; viewModel.submitText(it) },
         onChooseMeal = viewModel::chooseMeal, onChangeMeal = viewModel::changeMeal,
         onUpdateItem = viewModel::updateItem, onRemoveItem = viewModel::removeItem,
