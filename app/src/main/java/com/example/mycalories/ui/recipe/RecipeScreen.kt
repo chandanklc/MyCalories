@@ -1,9 +1,5 @@
 package com.example.mycalories.ui.recipe
 
-import android.Manifest
-import android.content.pm.PackageManager
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -20,14 +16,12 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Mic
 import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.LargeFloatingActionButton
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
@@ -41,11 +35,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.mycalories.R
 import com.example.mycalories.ui.components.BackScreen
@@ -59,14 +51,8 @@ import com.example.mycalories.ui.theme.MacroColors
 @Composable
 fun RecipeRoute(viewModel: RecipeViewModel, onBack: () -> Unit) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    val context = LocalContext.current
-    val mic = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { if (it) viewModel.startListening() }
-    val listen = {
-        if (ContextCompat.checkSelfPermission(context, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) viewModel.startListening()
-        else mic.launch(Manifest.permission.RECORD_AUDIO)
-    }
     LaunchedEffect(state.stage) { if (state.stage == RecipeStage.Saved) onBack() }
-    RecipeScreen(state, onBack, listen, viewModel::stopListening, viewModel::submitText, viewModel::setName,
+    RecipeScreen(state, onBack, viewModel::submitText, viewModel::setName,
         viewModel::setServings, viewModel::removeIngredient, viewModel::save)
 }
 
@@ -74,14 +60,13 @@ fun RecipeRoute(viewModel: RecipeViewModel, onBack: () -> Unit) {
 fun RecipeScreen(
     state: RecipeUiState,
     onBack: () -> Unit,
-    onListen: () -> Unit,
-    onStop: () -> Unit,
     onSubmit: (String) -> Unit,
     onName: (String) -> Unit,
     onServings: (Int) -> Unit,
     onRemove: (Int) -> Unit,
     onSave: () -> Unit,
 ) {
+    var typed by rememberSaveable { mutableStateOf("") }
     BackScreen(stringResource(R.string.new_recipe_title), onBack) {
         Column(Modifier.weight(1f).imePadding()) {
             when (state.stage) {
@@ -95,11 +80,9 @@ fun RecipeScreen(
                         CircularProgressIndicator(Modifier.size(24.dp)); Text(stringResource(R.string.working_out))
                     }
                     if (state.stage == RecipeStage.Error) Text(state.error?.text().orEmpty(), color = MaterialTheme.colorScheme.error)
-                    var typed by rememberSaveable { mutableStateOf("") }
                     OutlinedTextField(
                         value = typed, onValueChange = { typed = it }, modifier = Modifier.fillMaxWidth().testTag("recipeField"),
-                        placeholder = { Text(stringResource(R.string.type_instead)) }, minLines = 2,
-                        trailingIcon = { IconButton(onClick = { if (typed.isNotBlank()) onSubmit(typed) }) { Icon(Icons.Filled.Check, stringResource(R.string.send)) } },
+                        placeholder = { Text(stringResource(R.string.type_recipe)) }, minLines = 3,
                     )
                 }
             }
@@ -107,11 +90,11 @@ fun RecipeScreen(
         Row(Modifier.fillMaxWidth().padding(16.dp).navigationBarsPadding(), horizontalArrangement = Arrangement.Center) {
             if (state.stage == RecipeStage.Ready) {
                 Button(onClick = onSave, modifier = Modifier.fillMaxWidth().height(52.dp).testTag("saveRecipe")) { Text(stringResource(R.string.save_recipe)) }
-            } else {
-                LargeFloatingActionButton(onClick = if (state.stage == RecipeStage.Listening) onStop else onListen) {
-                    if (state.stage == RecipeStage.Listening) Icon(Icons.Filled.Check, stringResource(R.string.done_speaking))
-                    else Icon(Icons.Filled.Mic, stringResource(R.string.start_speaking))
-                }
+            } else if (state.stage != RecipeStage.Processing) {
+                Button(
+                    onClick = { if (typed.isNotBlank()) onSubmit(typed) }, enabled = typed.isNotBlank(),
+                    modifier = Modifier.fillMaxWidth().height(52.dp).testTag("sendRecipe"),
+                ) { Text(stringResource(R.string.work_out_recipe)) }
             }
         }
     }

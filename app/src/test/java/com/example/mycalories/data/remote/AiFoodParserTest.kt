@@ -18,6 +18,16 @@ class RecordingTransport(var reply: AiReply) : AiTransport {
 
 class AiFoodParserTest {
 
+    @Test
+    fun `prompt keeps foods eaten together as separate items`() {
+        val prompt = AiFoodParser.systemPrompt(emptyList())
+        assertTrue("roti with dal is two foods", prompt.contains("\"2 roti with dal\" is Roti and Dal"))
+        assertTrue(prompt.contains("only combine", ignoreCase = true))
+        assertTrue("sides count", prompt.contains("butter, ghee, pickle, chutney, raita and salad"))
+        assertTrue("no over-matching", prompt.contains("Paneer paratha is not Paratha"))
+    }
+
+
     private val okJson = """{"meal":"dinner","items":[{"name":"Paneer bhurji","quantity":1,"unit":"plate","grams":180,
         "amount_guessed":false,"usda_search_term":null,
         "per_100g":{"calories":220,"protein":13,"carbs":6,"fat":16,"fiber":1,"sugar":2,"sodium_mg":350}}]}"""

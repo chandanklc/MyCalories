@@ -4,7 +4,7 @@ import androidx.compose.ui.res.stringResource
 import com.example.mycalories.R
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material.icons.filled.Mic
+import androidx.compose.material.icons.filled.EditNote
 import com.example.mycalories.ui.components.label
 import com.example.mycalories.ui.components.labelRes
 import com.example.mycalories.ui.components.unitLabel
@@ -91,7 +91,7 @@ fun FoodsScreen(
             LazyColumn(contentPadding = PaddingValues(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 if (state.query.isBlank()) item {
                     OutlinedButton(onClick = onNewRecipe, modifier = Modifier.fillMaxWidth()) {
-                        Icon(Icons.Filled.Mic, null)
+                        Icon(Icons.Filled.EditNote, null)
                         Text("  " + stringResource(R.string.new_recipe))
                     }
                 }

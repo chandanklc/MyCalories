@@ -1,23 +1,16 @@
 package com.example.mycalories.ui.navigation
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BarChart
-import androidx.compose.material.icons.filled.CameraAlt
-import androidx.compose.material.icons.filled.Mic
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.QrCodeScanner
 import androidx.compose.material.icons.filled.Restaurant
 import androidx.compose.material.icons.filled.Today
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LargeFloatingActionButton
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -84,7 +77,7 @@ import kotlin.reflect.KClass
 @Serializable object HistoryRoute
 @Serializable object FoodsRoute
 @Serializable data class ProfileRoute(val firstRun: Boolean = false)
-@Serializable data class LogMealRoute(val epochDay: Long, val start: String = LogStart.VOICE.name)
+@Serializable data class LogMealRoute(val epochDay: Long, val start: String = LogStart.TYPE.name, val meal: String? = null)
 @Serializable data class MealDetailRoute(val epochDay: Long, val meal: String)
 @Serializable object RecipeRoute
 @Serializable object WeightRoute
@@ -118,7 +111,7 @@ fun AppNavigation(container: AppContainer, openRequest: String? = null, onOpenHa
     // Notifications, the widget and Health Connect can ask to open a screen.
     LaunchedEffect(openRequest) {
         when (openRequest) {
-            MainActivity.OPEN_VOICE -> nav.navigate(LogMealRoute(today()))
+            MainActivity.OPEN_LOG -> nav.navigate(LogMealRoute(today()))
             MainActivity.OPEN_PRIVACY -> nav.navigate(PrivacyRoute)
             MainActivity.OPEN_ADD_WATER -> scope.launch {
                 val d = LocalDate.now(container.clock)
@@ -149,22 +142,6 @@ fun AppNavigation(container: AppContainer, openRequest: String? = null, onOpenHa
                 }
             }
         },
-        floatingActionButton = {
-            if (destination?.hasRoute(TodayRoute::class) == true) {
-                Column(horizontalAlignment = Alignment.End, verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                    SmallFloatingActionButton(onClick = { nav.navigate(LogMealRoute(today(), LogStart.BARCODE.name)) }) {
-                        Icon(Icons.Filled.QrCodeScanner, stringResource(R.string.scan_barcode))
-                    }
-                    if (settings.allowPhotos) SmallFloatingActionButton(onClick = { nav.navigate(LogMealRoute(today(), LogStart.PHOTO.name)) }) {
-                        Icon(Icons.Filled.CameraAlt, stringResource(R.string.log_by_photo))
-                    }
-                    LargeFloatingActionButton(
-                        onClick = { nav.navigate(LogMealRoute(today())) },
-                        modifier = Modifier.testTag("fabMic"),
-                    ) { Icon(Icons.Filled.Mic, contentDescription = stringResource(R.string.speak_what_you_ate)) }
-                }
-            }
-        },
     ) { scaffoldPadding ->
         // Each screen's TopAppBar handles the status bar itself, so only pass the bottom bar's space down.
         val padding = PaddingValues(bottom = scaffoldPadding.calculateBottomPadding())
@@ -177,9 +154,12 @@ fun AppNavigation(container: AppContainer, openRequest: String? = null, onOpenHa
                     vm, padding,
                     onNeedsProfile = { nav.navigate(ProfileRoute(firstRun = true)) { launchSingleTop = true } },
                     onOpenMeal = { date, meal -> nav.navigate(MealDetailRoute(date.toEpochDay(), meal.name)) },
-                    onAddToMeal = { date -> nav.navigate(LogMealRoute(date.toEpochDay())) },
+                    onAddToMeal = { date, meal -> nav.navigate(LogMealRoute(date.toEpochDay(), meal = meal.name)) },
                     onAsk = { nav.navigate(AskRoute) },
                     onMicros = { nav.navigate(MicrosRoute) },
+                    onType = { nav.navigate(LogMealRoute(today())) },
+                    onPhoto = if (settings.allowPhotos) ({ nav.navigate(LogMealRoute(today(), LogStart.PHOTO.name)) }) else null,
+                    onBarcode = { nav.navigate(LogMealRoute(today(), LogStart.BARCODE.name)) },
                 )
             }
             composable<HistoryRoute> {
@@ -210,9 +190,10 @@ fun AppNavigation(container: AppContainer, openRequest: String? = null, onOpenHa
                 val vm: LogMealViewModel = viewModel(factory = viewModelFactory {
                     initializer {
                         LogMealViewModel(
-                            container.voiceInput(), container.parser, container.resolver, container.log,
-                            container.profiles, container.savedMeals, container.clock, LocalDate.ofEpochDay(route.epochDay),
+                            container.parser, container.resolver, container.foods, container.log,
+                            container.savedMeals, container.clock, LocalDate.ofEpochDay(route.epochDay),
                             container.packagedFoods, container.settings, container.portions,
+                            initialMeal = MealType.fromString(route.meal),
                         )
                     }
                 })
@@ -227,11 +208,11 @@ fun AppNavigation(container: AppContainer, openRequest: String? = null, onOpenHa
                     }
                 })
                 MealDetailRoute(vm, onBack = { nav.popBackStack() },
-                    onAddByVoice = { nav.navigate(LogMealRoute(route.epochDay)) }, onMicros = { nav.navigate(MicrosRoute) })
+                    onAdd = { nav.navigate(LogMealRoute(route.epochDay, meal = route.meal)) }, onMicros = { nav.navigate(MicrosRoute) })
             }
             composable<RecipeRoute> {
                 val vm: RecipeViewModel = viewModel(factory = viewModelFactory {
-                    initializer { RecipeViewModel(container.voiceInput(), container.parser, container.resolver, container.foods, container.clock) }
+                    initializer { RecipeViewModel(container.parser, container.resolver, container.foods, container.clock) }
                 })
                 RecipeRoute(vm, onBack = { nav.popBackStack() })
             }

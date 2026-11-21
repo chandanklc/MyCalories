@@ -126,7 +126,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_OPEN = "open"
-        const val OPEN_VOICE = "voice"
+        const val OPEN_LOG = "log"
         const val OPEN_ADD_WATER = "water"
         const val OPEN_PRIVACY = "privacy"
     }

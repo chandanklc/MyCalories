@@ -14,9 +14,6 @@ import com.example.mycalories.domain.model.FoodSource
 import com.example.mycalories.domain.model.LoggedItem
 import com.example.mycalories.domain.model.MealType
 import com.example.mycalories.domain.repository.FoodRepository
-import com.example.mycalories.voice.VoiceEvent
-import com.example.mycalories.voice.VoiceInput
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -25,7 +22,7 @@ import kotlinx.coroutines.launch
 import java.time.Clock
 import java.time.LocalDate
 
-enum class RecipeStage { Idle, Listening, Processing, Ready, Saved, Error }
+enum class RecipeStage { Idle, Processing, Ready, Saved, Error }
 
 data class RecipeUiState(
     val stage: RecipeStage = RecipeStage.Idle,
@@ -40,9 +37,8 @@ data class RecipeUiState(
         get() = if (ingredients.isEmpty()) null else RecipeCalculator.calculate(ingredients.map { it.grams to it.per100g }, servings)
 }
 
-/** "Mom's dal: one cup toor dal, two tbsp ghee… makes four bowls" → a saved food with per-bowl nutrients. */
+/** Typed: "Mom's dal: one cup toor dal, two tbsp ghee… makes four bowls" → a saved food with per-bowl nutrients. */
 class RecipeViewModel(
-    private val voice: VoiceInput,
     private val parser: FoodParser,
     private val resolver: FoodResolver,
     private val foods: FoodRepository,
@@ -51,25 +47,6 @@ class RecipeViewModel(
 
     private val _state = MutableStateFlow(RecipeUiState())
     val state: StateFlow<RecipeUiState> = _state.asStateFlow()
-    private var listenJob: Job? = null
-
-    fun startListening() {
-        listenJob?.cancel()
-        _state.update { it.copy(stage = RecipeStage.Listening, transcript = "", error = null) }
-        listenJob = viewModelScope.launch {
-            voice.listen().collect { e ->
-                when (e) {
-                    VoiceEvent.Ready -> Unit
-                    is VoiceEvent.Partial -> _state.update { it.copy(transcript = e.text) }
-                    is VoiceEvent.Final -> if (e.text.isBlank()) fail(AppError.NO_SPEECH) else submitText(e.text)
-                    is VoiceEvent.Error -> fail(e.error)
-                }
-            }
-        }
-    }
-
-    fun stopListening() = voice.stop()
-
     fun submitText(text: String) {
         _state.update { it.copy(stage = RecipeStage.Processing, transcript = text, error = null) }
         viewModelScope.launch {
@@ -112,5 +89,4 @@ class RecipeViewModel(
         }
     }
 
-    override fun onCleared() = voice.stop()
 }

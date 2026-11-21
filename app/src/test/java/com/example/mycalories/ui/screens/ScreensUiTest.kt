@@ -17,6 +17,7 @@ import com.example.mycalories.domain.model.FoodSource
 import com.example.mycalories.domain.model.LoggedItem
 import com.example.mycalories.domain.model.MealType
 import com.example.mycalories.domain.model.Nutrients
+import com.example.mycalories.ui.logmeal.FoodSuggestion
 import com.example.mycalories.ui.logmeal.LogMealScreen
 import com.example.mycalories.ui.logmeal.LogMealUiState
 import com.example.mycalories.ui.logmeal.Stage
@@ -81,17 +82,19 @@ class ScreensUiTest {
     fun `tapping a logged meal opens it and an empty meal adds to it`() {
         var opened: MealType? = null
         var added = 0
+        var addedTo: MealType? = null
         val summary = DaySummary.of(today, listOf(item("Dal", MealType.LUNCH, 100.0, 600.0)), goal)
         compose.setContent {
             MyCaloriesTheme {
                 TodayScreen(TodayUiState(today, true, summary, loading = false), PaddingValues(), {}, {}, {}, {}, {},
-                    onOpenMeal = { opened = it }, onAddToMeal = { added++ })
+                    onOpenMeal = { opened = it }, onAddToMeal = { addedTo = it; added++ })
             }
         }
         compose.onNodeWithTag("meal_LUNCH").performClick()
         assertEquals(MealType.LUNCH, opened)
         compose.onNodeWithTag("meal_DINNER").performClick()
         assertEquals(1, added)
+        assertEquals("the + knows which meal it is for", MealType.DINNER, addedTo)
     }
 
     @Test
@@ -123,50 +126,108 @@ class ScreensUiTest {
         assertEquals(1, today)
     }
 
-    // ---------- Log meal ----------
+    // ---------- Log meal: type and search ----------
 
-    private fun logScreen(state: LogMealUiState, typing: Boolean = false, calls: MutableList<String> = mutableListOf()) {
+    private val paratha = com.example.mycalories.domain.model.Food(2, "Paneer paratha",
+        Nutrients(calories = 290.0), "piece", 90.0, FoodSource.LOCAL)
+
+    private fun logScreen(state: LogMealUiState, calls: MutableList<String> = mutableListOf()) {
         compose.setContent {
             MyCaloriesTheme {
                 LogMealScreen(
-                    state = state, typing = typing,
-                    onListen = { calls += "listen" }, onStop = { calls += "stop" }, onType = { calls += "type" },
-                    onSubmitText = { calls += "submit:$it" },
-                    onChooseMeal = { m, r -> calls += "choose:${m.name}:$r" }, onChangeMeal = { calls += "change:${it.name}" },
+                    state = state,
+                    onQuery = { calls += "query:$it" },
+                    onAddSuggestion = { calls += "add:${it.food.name}:${it.quantity}" },
+                    onFindWithAi = { calls += "ai" },
+                    onMeal = { calls += "meal:${it.name}" },
+                    onReview = { calls += "review" }, onAddMore = { calls += "more" },
                     onUpdateItem = { i, q, u -> calls += "update:$i:$q:$u" }, onRemoveItem = { calls += "remove:$it" },
                     onFavorite = { calls += "fav:$it" }, onFavoriteName = { calls += "favName:$it" },
                     onSave = { calls += "save" }, onRetry = { calls += "retry" }, onClose = { calls += "close" },
+                    onPhoto = { calls += "photo" }, onBarcode = { calls += "barcode" },
                 )
             }
         }
     }
 
     @Test
-    fun `listening shows the live transcript and done button`() {
+    fun `typing shows matching foods with calories for the amount, and + adds one`() {
         val calls = mutableListOf<String>()
-        logScreen(LogMealUiState(stage = Stage.Listening, transcript = "two roti"), calls = calls)
-        compose.onNodeWithTag("transcript").assertTextContains("two roti")
-        compose.onNodeWithContentDescription("Done speaking").performClick()
-        assertEquals(listOf("stop"), calls)
+        logScreen(LogMealUiState(query = "2 pan", meal = MealType.DINNER,
+            suggestions = listOf(FoodSuggestion(paratha, 2.0))), calls)
+        compose.onNodeWithTag("searchField").assertTextContains("2 pan")
+        compose.onNodeWithTag("suggestion_Paneer paratha").assertTextContains("522", substring = true)
+        compose.onNodeWithContentDescription("Add Paneer paratha").performClick()
+        assertEquals(listOf("add:Paneer paratha:2.0"), calls)
     }
 
     @Test
-    fun `review shows items total and saves to the meal`() {
+    fun `the AI button repeats what was typed and sends it`() {
+        val calls = mutableListOf<String>()
+        logScreen(LogMealUiState(query = "2 roti with dal", meal = MealType.LUNCH), calls)
+        compose.onNodeWithTag("findWithAi").assertTextContains("2 roti with dal", substring = true).performClick()
+        assertEquals(listOf("ai"), calls)
+    }
+
+    @Test
+    fun `no AI button before anything is typed`() {
+        logScreen(LogMealUiState(meal = MealType.LUNCH, suggestions = listOf(FoodSuggestion(paratha, 1.0))))
+        compose.onNodeWithTag("findWithAi").assertDoesNotExist()
+        compose.onNodeWithText("Your foods").assertIsDisplayed()
+    }
+
+    @Test
+    fun `meal chips pick the meal`() {
+        val calls = mutableListOf<String>()
+        logScreen(LogMealUiState(meal = MealType.LUNCH), calls)
+        compose.onNodeWithTag("mealChip_DINNER").performClick()
+        assertEquals(listOf("meal:DINNER"), calls)
+    }
+
+    @Test
+    fun `photo and barcode are one tap away`() {
+        val calls = mutableListOf<String>()
+        logScreen(LogMealUiState(meal = MealType.LUNCH), calls)
+        compose.onNodeWithContentDescription("Log by photo").performClick()
+        compose.onNodeWithContentDescription("Scan a barcode").performClick()
+        assertEquals(listOf("photo", "barcode"), calls)
+    }
+
+    @Test
+    fun `picked foods show in a tray that opens the review`() {
+        val calls = mutableListOf<String>()
+        logScreen(LogMealUiState(meal = MealType.LUNCH, items = listOf(item("Roti", MealType.LUNCH, 300.0, 80.0))), calls)
+        compose.onNodeWithTag("tray").assertTextContains("Lunch so far", substring = true)
+        compose.onNodeWithTag("tray").assertTextContains("240 kcal", substring = true)
+        compose.onNodeWithText("Review").performClick()
+        assertEquals(listOf("review"), calls)
+    }
+
+    @Test
+    fun `no tray and no voice button when nothing is picked`() {
+        logScreen(LogMealUiState(meal = MealType.LUNCH))
+        compose.onNodeWithTag("tray").assertDoesNotExist()
+        compose.onNodeWithContentDescription("Start speaking").assertDoesNotExist()
+    }
+
+    @Test
+    fun `review shows items total, adds more by typing and saves to the meal`() {
         val calls = mutableListOf<String>()
         val items = listOf(item("Roti", MealType.LUNCH, 300.0, 80.0), item("Salad", MealType.LUNCH, 20.0, 150.0, review = true))
-        logScreen(LogMealUiState(stage = Stage.Review, items = items, meal = MealType.LUNCH), calls = calls)
+        logScreen(LogMealUiState(stage = Stage.Review, items = items, meal = MealType.LUNCH), calls)
 
         compose.onNodeWithText("Roti").assertIsDisplayed()
         compose.onNodeWithText("Please check").assertIsDisplayed()
         compose.onNodeWithTag("mealTotal").assertTextContains("270 kcal")
+        compose.onNodeWithText("Add more by typing").performClick()
         compose.onNodeWithTag("saveMeal").assertTextContains("Add 270 kcal to Lunch").performClick()
-        assertEquals(listOf("save"), calls)
+        assertEquals(listOf("more", "save"), calls)
     }
 
     @Test
     fun `tapping an item opens the portion editor and saves`() {
         val calls = mutableListOf<String>()
-        logScreen(LogMealUiState(stage = Stage.Review, items = listOf(item("Roti", MealType.LUNCH, 300.0, 80.0)), meal = MealType.LUNCH), calls = calls)
+        logScreen(LogMealUiState(stage = Stage.Review, items = listOf(item("Roti", MealType.LUNCH, 300.0, 80.0)), meal = MealType.LUNCH), calls)
         compose.onNodeWithTag("reviewItem").performClick()
         compose.onNodeWithContentDescription("More").performClick()
         compose.onNodeWithText("Save").performClick()
@@ -174,33 +235,29 @@ class ScreensUiTest {
     }
 
     @Test
-    fun `choose meal sheet offers every meal and passes remember`() {
+    fun `error shows message and try again`() {
         val calls = mutableListOf<String>()
-        logScreen(LogMealUiState(stage = Stage.ChooseMeal, transcript = "dal", suggestedMeal = MealType.LUNCH), calls = calls)
-        compose.onNodeWithText("Which meal is this?").assertIsDisplayed()
-        compose.onNodeWithText("Suggested").assertIsDisplayed()
-        compose.onNodeWithText("Always pick by time of day, don't ask").performClick()
-        compose.onNodeWithTag("choose_DINNER").performClick()
-        assertTrue(calls.contains("choose:DINNER:true"))
-    }
-
-    @Test
-    fun `error shows message with retry and type instead`() {
-        val calls = mutableListOf<String>()
-        logScreen(LogMealUiState(stage = Stage.Error, error = com.example.mycalories.data.remote.AppError.NETWORK), calls = calls)
+        logScreen(LogMealUiState(stage = Stage.Error, meal = MealType.LUNCH, error = com.example.mycalories.data.remote.AppError.NETWORK), calls)
         compose.onNodeWithTag("error").assertTextContains("Couldn't connect", substring = true)
         compose.onNodeWithText("Try again").performClick()
-        compose.onNodeWithText("Type instead").performClick()
-        assertEquals(listOf("retry", "type"), calls)
+        assertEquals(listOf("retry"), calls)
     }
 
+    // ---------- Today: typing bar ----------
+
     @Test
-    fun `typed text is submitted`() {
-        val calls = mutableListOf<String>()
-        logScreen(LogMealUiState(stage = Stage.Idle), typing = true, calls = calls)
-        compose.onNodeWithTag("typeField").performTextInput("one bowl poha")
-        compose.onNodeWithContentDescription("Send").performClick()
-        assertEquals(listOf("submit:one bowl poha"), calls)
+    fun `today has a typing bar with photo and barcode, and no mic`() {
+        var typed = 0; var photo = 0; var barcode = 0
+        compose.setContent {
+            MyCaloriesTheme {
+                TodayScreen(TodayUiState(today, true, DaySummary.of(today, emptyList(), goal), loading = false), PaddingValues(),
+                    {}, {}, {}, {}, {}, {}, {}, onType = { typed++ }, onPhoto = { photo++ }, onBarcode = { barcode++ })
+            }
+        }
+        compose.onNodeWithTag("typeBar").assertTextContains("What did you eat?").performClick()
+        compose.onNodeWithContentDescription("Log by photo").performClick()
+        compose.onNodeWithContentDescription("Scan a barcode").performClick()
+        assertEquals(listOf(1, 1, 1), listOf(typed, photo, barcode))
     }
 
     // ---------- Profile ----------

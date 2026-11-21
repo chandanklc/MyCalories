@@ -26,15 +26,13 @@ val MealType.labelRes: Int
 @Composable
 fun AppError.text(): String = stringResource(
     when (this) {
-        AppError.NO_SPEECH -> R.string.err_no_speech
+        AppError.NOTHING_TYPED -> R.string.err_nothing_typed
         AppError.NO_FOOD -> R.string.err_no_food
         AppError.NETWORK -> R.string.err_network
         AppError.REFUSED -> R.string.err_refused
         AppError.TOO_LONG -> R.string.err_too_long
         AppError.BAD_REPLY -> R.string.err_bad_reply
         AppError.NOT_CONFIGURED -> R.string.err_not_configured
-        AppError.MIC_PERMISSION -> R.string.err_mic_permission
-        AppError.SPEECH_UNAVAILABLE -> R.string.err_speech_unavailable
         AppError.BARCODE_NOT_FOUND -> R.string.err_barcode_not_found
         AppError.INVALID_BACKUP -> R.string.err_invalid_backup
         AppError.BAD_KEY -> R.string.err_bad_key

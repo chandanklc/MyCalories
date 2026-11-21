@@ -82,13 +82,25 @@ class NewScreensUiTest {
     }
 
     @Test
+    fun `recipe is typed, with no mic`() {
+        val sent = mutableListOf<String>()
+        compose.setContent {
+            MyCaloriesTheme { RecipeScreen(RecipeUiState(), {}, { sent += it }, {}, {}, {}, {}) }
+        }
+        compose.onNodeWithContentDescription("Start speaking").assertDoesNotExist()
+        compose.onNodeWithTag("recipeField").performTextInput("dal with ghee, makes 4 bowls")
+        compose.onNodeWithTag("sendRecipe").performClick()
+        assertEquals(listOf("dal with ghee, makes 4 bowls"), sent)
+    }
+
+    @Test
     fun `recipe shows per serving numbers and saves`() {
         var saved = 0
         var servings = 0
         val state = RecipeUiState(RecipeStage.Ready, name = "Mom's dal", servings = 4, servingUnit = "bowl",
             ingredients = listOf(item("Toor dal", 343.0, 200.0), item("Ghee", 900.0, 26.0)))
         compose.setContent {
-            MyCaloriesTheme { RecipeScreen(state, {}, {}, {}, {}, {}, { servings = it }, {}, { saved++ }) }
+            MyCaloriesTheme { RecipeScreen(state, {}, {}, {}, { servings = it }, {}, { saved++ }) }
         }
         compose.onNodeWithTag("perServing").assertTextContains("230 kcal")
         compose.onNodeWithTag("servings").assertTextContains("4 bowl")

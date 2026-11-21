@@ -75,8 +75,9 @@ class GroqTransport(
                 }
             })
             put("max_completion_tokens", request.maxTokens)
-            // gpt-oss thinks before answering; a little is plenty for picking foods out of a sentence.
-            if (model.startsWith("openai/gpt-oss")) put("reasoning_effort", "low")
+            // gpt-oss thinks before answering. On "low" it skipped side dishes (salad, butter) and its calories
+            // wandered; "medium" lists every food and still answers in about 2 s.
+            if (model.startsWith("openai/gpt-oss")) put("reasoning_effort", "medium")
             if (schema != null) put("response_format", buildJsonObject {
                 if (strict) {
                     put("type", "json_schema")

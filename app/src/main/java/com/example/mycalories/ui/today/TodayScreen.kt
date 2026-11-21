@@ -1,5 +1,13 @@
 package com.example.mycalories.ui.today
 
+import androidx.compose.material3.Surface
+import androidx.compose.material3.FilledTonalIconButton
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.QrCodeScanner
+import androidx.compose.material.icons.filled.CameraAlt
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -72,9 +80,12 @@ fun TodayRoute(
     contentPadding: PaddingValues,
     onNeedsProfile: () -> Unit,
     onOpenMeal: (LocalDate, MealType) -> Unit,
-    onAddToMeal: (LocalDate) -> Unit,
+    onAddToMeal: (LocalDate, MealType) -> Unit,
     onAsk: () -> Unit,
     onMicros: () -> Unit,
+    onType: () -> Unit = {},
+    onPhoto: (() -> Unit)? = null,
+    onBarcode: () -> Unit = {},
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     LaunchedEffect(state.needsProfile, state.loading) {
@@ -84,9 +95,10 @@ fun TodayRoute(
         state = state, contentPadding = contentPadding,
         onPrevious = viewModel::previousDay, onNext = viewModel::nextDay, onToday = viewModel::goToToday,
         onAddWater = viewModel::addWater, onRemoveWater = viewModel::removeWater,
-        onOpenMeal = { onOpenMeal(state.date, it) }, onAddToMeal = { onAddToMeal(state.date) },
+        onOpenMeal = { onOpenMeal(state.date, it) }, onAddToMeal = { onAddToMeal(state.date, it) },
         onCopy = viewModel::copyFromYesterday, onMessageShown = viewModel::messageShown,
         onAsk = onAsk, onMicros = onMicros,
+        onType = onType, onPhoto = onPhoto, onBarcode = onBarcode,
     )
 }
 
@@ -101,11 +113,14 @@ fun TodayScreen(
     onAddWater: () -> Unit,
     onRemoveWater: () -> Unit,
     onOpenMeal: (MealType) -> Unit,
-    onAddToMeal: () -> Unit,
+    onAddToMeal: (MealType) -> Unit,
     onCopy: (MealType?) -> Unit = {},
     onMessageShown: () -> Unit = {},
     onAsk: () -> Unit = {},
     onMicros: () -> Unit = {},
+    onType: () -> Unit = {},
+    onPhoto: (() -> Unit)? = null,
+    onBarcode: () -> Unit = {},
 ) {
     val summary = state.summary
     val snackbar = remember { SnackbarHostState() }
@@ -151,7 +166,7 @@ fun TodayScreen(
                 }
                 if (state.yesterdayMeals.isNotEmpty()) item { YesterdayChips(state.yesterdayMeals, onCopy) }
                 items(summary.meals, key = { it.meal.name }) { meal ->
-                    MealCard(meal, onOpen = { onOpenMeal(meal.meal) }, onAdd = onAddToMeal)
+                    MealCard(meal, onOpen = { onOpenMeal(meal.meal) }, onAdd = { onAddToMeal(meal.meal) })
                 }
                 item {
                     AssistChip(
@@ -161,7 +176,29 @@ fun TodayScreen(
                 }
             }
         }
+        TypeBar(onType, onPhoto, onBarcode, Modifier.align(Alignment.BottomCenter).padding(16.dp))
         SnackbarHost(snackbar, Modifier.align(Alignment.BottomCenter).padding(bottom = 96.dp))
+    }
+}
+
+/** The one way in to logging: tap to type what you ate; photo and barcode sit inside the bar. */
+@Composable
+private fun TypeBar(onType: () -> Unit, onPhoto: (() -> Unit)?, onBarcode: () -> Unit, modifier: Modifier = Modifier) {
+    Surface(
+        onClick = onType,
+        shape = RoundedCornerShape(30.dp),
+        color = MaterialTheme.colorScheme.surfaceContainerLowest,
+        border = BorderStroke(2.dp, MaterialTheme.colorScheme.primary),
+        shadowElevation = 6.dp,
+        modifier = modifier.fillMaxWidth().height(60.dp).testTag("typeBar"),
+    ) {
+        Row(Modifier.padding(start = 18.dp, end = 8.dp), verticalAlignment = Alignment.CenterVertically) {
+            Icon(Icons.Filled.Search, null, tint = MaterialTheme.colorScheme.primary)
+            Text(stringResource(R.string.what_did_you_eat), Modifier.weight(1f).padding(start = 12.dp),
+                style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            if (onPhoto != null) FilledTonalIconButton(onClick = onPhoto) { Icon(Icons.Filled.CameraAlt, stringResource(R.string.log_by_photo)) }
+            FilledTonalIconButton(onClick = onBarcode) { Icon(Icons.Filled.QrCodeScanner, stringResource(R.string.scan_barcode)) }
+        }
     }
 }
 

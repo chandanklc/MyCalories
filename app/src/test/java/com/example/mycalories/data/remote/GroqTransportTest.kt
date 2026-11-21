@@ -70,7 +70,7 @@ class GroqTransportTest {
     }
 
     @Test
-    fun `sends the system prompt, the message, the token limit and low reasoning`() = runTest {
+    fun `sends the system prompt, the message, the token limit and medium reasoning`() = runTest {
         transport().send(request)
         val b = bodies.single()
         assertEquals("openai/gpt-oss-20b", b["model"]!!.jsonPrimitive.content)
@@ -80,7 +80,7 @@ class GroqTransportTest {
         assertEquals("user", messages[1].jsonObject["role"]!!.jsonPrimitive.content)
         assertEquals("two roti", messages[1].jsonObject["content"]!!.jsonPrimitive.content)
         assertEquals(4000, b["max_completion_tokens"]!!.jsonPrimitive.int)
-        assertEquals("low", b["reasoning_effort"]!!.jsonPrimitive.content)
+        assertEquals("medium", b["reasoning_effort"]!!.jsonPrimitive.content)
     }
 
     @Test

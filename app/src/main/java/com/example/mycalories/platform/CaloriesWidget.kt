@@ -40,7 +40,7 @@ import java.time.LocalDate
 import kotlin.math.abs
 import kotlin.math.roundToInt
 
-/** Home-screen widget: calories left today and a button that opens straight into voice logging. */
+/** Home-screen widget: calories left today and a button that opens straight into logging a meal. */
 class CaloriesWidget : GlanceAppWidget() {
 
     override suspend fun provideGlance(context: Context, id: GlanceId) {
@@ -52,16 +52,16 @@ class CaloriesWidget : GlanceAppWidget() {
         val e = summary.eaten
         val leftLabel = context.getString(if (left >= 0) R.string.kcal_left else R.string.kcal_over)
         val macros = context.getString(R.string.widget_macros, e.protein.roundToInt(), e.carbs.roundToInt(), e.fat.roundToInt())
-        val speak = context.getString(R.string.widget_speak)
+        val logLabel = context.getString(R.string.widget_log)
 
-        provideContent { GlanceTheme { Content(abs(left), leftLabel, macros, speak) } }
+        provideContent { GlanceTheme { Content(abs(left), leftLabel, macros, logLabel) } }
     }
 
     @Composable
-    private fun Content(left: Int, leftLabel: String, macros: String, speak: String) {
+    private fun Content(left: Int, leftLabel: String, macros: String, logLabel: String) {
         val open = actionStartActivity(
             Intent().setClassName("com.example.mycalories", MainActivity::class.java.name)
-                .putExtra(MainActivity.EXTRA_OPEN, MainActivity.OPEN_VOICE)
+                .putExtra(MainActivity.EXTRA_OPEN, MainActivity.OPEN_LOG)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP),
         )
         Row(
@@ -78,7 +78,7 @@ class CaloriesWidget : GlanceAppWidget() {
                 GlanceModifier.size(56.dp).background(Color(0xFF1E7F55)).cornerRadius(18.dp).clickable(open),
                 contentAlignment = Alignment.Center,
             ) {
-                Text(speak, style = TextStyle(color = ColorProvider(Color.White), fontWeight = FontWeight.Bold, fontSize = 12.sp))
+                Text(logLabel, style = TextStyle(color = ColorProvider(Color.White), fontWeight = FontWeight.Bold, fontSize = 12.sp))
             }
         }
     }

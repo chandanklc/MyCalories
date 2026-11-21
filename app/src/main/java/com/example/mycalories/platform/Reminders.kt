@@ -82,7 +82,7 @@ class AndroidNotifier(private val context: Context) : Notifier {
             .setSmallIcon(R.drawable.ic_stat_food)
             .setContentTitle(context.getString(R.string.notif_meal_title, mealName))
             .setContentText(context.getString(R.string.notif_meal_text))
-            .setContentIntent(open(MainActivity.OPEN_VOICE, 10 + meal.ordinal))
+            .setContentIntent(open(MainActivity.OPEN_LOG, 10 + meal.ordinal))
             .setAutoCancel(true)
             .build()
         @Suppress("MissingPermission")

@@ -33,7 +33,6 @@ import com.example.mycalories.fakes.FakeLogRepository
 import com.example.mycalories.fakes.FakeOnlineSource
 import com.example.mycalories.fakes.FakeProfileRepository
 import com.example.mycalories.fakes.FakeSettingsRepository
-import com.example.mycalories.fakes.FakeVoiceInput
 import com.example.mycalories.fakes.FakeWeightRepository
 import com.example.mycalories.fakes.MainDispatcherRule
 import com.example.mycalories.fakes.clockAt
@@ -48,7 +47,6 @@ import com.example.mycalories.ui.recipe.RecipeViewModel
 import com.example.mycalories.ui.settings.SettingsViewModel
 import com.example.mycalories.ui.weekly.WeeklySummaryViewModel
 import com.example.mycalories.ui.weight.WeightViewModel
-import com.example.mycalories.voice.VoiceEvent
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
@@ -72,18 +70,16 @@ class RecipeViewModelTest {
 
     private val parser = FakeFoodParser()
     private val foods = FakeFoodRepository()
-    private val voice = FakeVoiceInput()
-    private fun vm() = RecipeViewModel(voice, parser, FoodResolver(foods, FakeOnlineSource()), foods, clockAt(12))
+    private fun vm() = RecipeViewModel(parser, FoodResolver(foods, FakeOnlineSource()), foods, clockAt(12))
 
     private fun ing(name: String, grams: Double, kcal: Double) =
         ParsedFood(name, 1.0, "g", grams, null, Nutrients(calories = kcal, protein = 10.0), false)
 
     @Test
-    fun `spoken recipe gives per serving numbers`() = runTest {
+    fun `typed recipe gives per serving numbers`() = runTest {
         parser.recipe = ParsedRecipe("Mom's dal", 4, "bowl", listOf(ing("Toor dal", 200.0, 343.0), ing("Ghee", 26.0, 900.0)))
         val vm = vm()
-        vm.startListening()
-        voice.events.emit(VoiceEvent.Final("mom's dal ..."))
+        vm.submitText("mom's dal ...")
         val s = vm.state.value
         assertEquals(RecipeStage.Ready, s.stage)
         assertEquals("Mom's dal", s.name)

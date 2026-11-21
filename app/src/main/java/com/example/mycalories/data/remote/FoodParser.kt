@@ -11,7 +11,7 @@ interface FoodParser {
     /** Foods seen in a photo of a plate. */
     suspend fun parseImage(image: ImageInput): ParsedMeal
 
-    /** A recipe described by voice: ingredients and how many servings it makes. */
+    /** A recipe described in words: ingredients and how many servings it makes. */
     suspend fun parseRecipe(text: String): ParsedRecipe
 }
 
@@ -41,8 +41,8 @@ data class ParsedFood(
 
 /** Why something failed, as a code; screens turn it into words in the user's language. */
 enum class AppError {
-    NO_SPEECH, NO_FOOD, NETWORK, REFUSED, TOO_LONG, BAD_REPLY, NOT_CONFIGURED,
-    MIC_PERMISSION, SPEECH_UNAVAILABLE, BARCODE_NOT_FOUND, INVALID_BACKUP, BAD_KEY, NO_CREDIT, FREE_LIMIT, MODEL_UNAVAILABLE, BUSY, GENERIC,
+    NOTHING_TYPED, NO_FOOD, NETWORK, REFUSED, TOO_LONG, BAD_REPLY, NOT_CONFIGURED,
+    BARCODE_NOT_FOUND, INVALID_BACKUP, BAD_KEY, NO_CREDIT, FREE_LIMIT, MODEL_UNAVAILABLE, BUSY, GENERIC,
 }
 
 class FoodParserException(val error: AppError, cause: Throwable? = null) : Exception(error.name, cause)

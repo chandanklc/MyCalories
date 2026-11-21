@@ -15,7 +15,6 @@
     <string name="kcal_value">%1$s kcal</string>
     <string name="grams_value">%1$s ग्राम</string>
     <string name="try_again">फिर से कोशिश करें</string>
-    <string name="type_instead">लिखकर बताएँ</string>
     <string name="send">भेजें</string>
 
     <!-- भोजन -->
@@ -87,7 +86,6 @@
     <string name="copy_whole_day">पूरा दिन कॉपी करें</string>
     <string name="copied_meal">कल का %1$s कॉपी किया</string>
     <string name="copied_day">कल का पूरा दिन कॉपी किया</string>
-    <string name="speak_what_you_ate">बोलकर बताएँ क्या खाया</string>
     <string name="log_by_photo">फ़ोटो से दर्ज करें</string>
     <string name="scan_barcode">बारकोड स्कैन करें</string>
     <string name="ask_about_food">अपने खाने के बारे में पूछें</string>
@@ -125,25 +123,12 @@
     <!-- खाना दर्ज करें -->
     <string name="log_meal_title">खाना दर्ज करें</string>
     <string name="check_before_saving">सेव करने से पहले जाँचें</string>
-    <string name="listening">सुन रहे हैं…</string>
-    <string name="tap_mic_hint">माइक दबाएँ और बताएँ आपने क्या खाया</string>
-    <string name="transcript_example">जैसे \"दोपहर में दो रोटी, एक कटोरा दाल और थोड़ा सलाद\"</string>
-    <string name="tip_amount">सुझाव: खाने का समय और मात्रा बताएँ, जैसे \"रात को 150 ग्राम पनीर\"</string>
     <string name="working_out">कैलोरी निकाल रहे हैं…</string>
     <string name="this_meal">यह भोजन</string>
     <string name="save_favourite">पसंदीदा भोजन के रूप में सेव करें</string>
     <string name="favourite_name">नाम</string>
     <string name="favourite_placeholder">मेरा %1$s</string>
-    <string name="type_more">और लिखें</string>
-    <string name="say_more">और बोलें</string>
     <string name="add_to_meal">%2$s में %1$s kcal जोड़ें</string>
-    <string name="type_what_you_ate">लिखें आपने क्या खाया</string>
-    <string name="start_speaking">बोलना शुरू करें</string>
-    <string name="done_speaking">बोलना हो गया</string>
-    <string name="which_meal">यह कौन सा भोजन है?</string>
-    <string name="which_meal_hint">आपने नहीं बताया। हमें लगता है यह %1$s है।</string>
-    <string name="suggested">सुझाया गया</string>
-    <string name="always_pick">हमेशा समय के हिसाब से चुनें, न पूछें</string>
     <string name="change_meal">भोजन बदलें</string>
     <string name="edit_item">%1$s बदलें</string>
     <string name="item_line">%1$s %2$s · %3$s ग्राम · %4$s</string>
@@ -151,15 +136,12 @@
     <string name="photo_estimate_note">फ़ोटो से मात्रा का अनुमान लगाया गया है। हर मात्रा जाँच लें।</string>
 
     <!-- गलतियाँ -->
-    <string name="err_no_speech">कुछ सुनाई नहीं दिया। माइक दबाकर फिर से बोलें।</string>
     <string name="err_no_food">इसमें कोई खाना समझ नहीं आया। जैसे बोलें \"दो रोटी और एक कटोरा दाल\"।</string>
     <string name="err_network">कनेक्ट नहीं हो पाया। इंटरनेट जाँचें और फिर से कोशिश करें।</string>
     <string name="err_refused">यह प्रोसेस नहीं हो पाया। दूसरे तरीके से बताएँ।</string>
     <string name="err_too_long">यह बहुत लंबा था। एक बार में एक भोजन बताएँ।</string>
     <string name="err_bad_reply">जवाब पढ़ने में दिक्कत हुई। फिर से कोशिश करें।</string>
     <string name="err_not_configured">फ़ूड सेवा अभी सेट नहीं है। local.properties में GEMINI_API_KEY जोड़ें (aistudio.google.com से मुफ़्त चाबी)।</string>
-    <string name="err_mic_permission">बोलकर दर्ज करने के लिए माइक की अनुमति चाहिए।</string>
-    <string name="err_speech_unavailable">इस फ़ोन पर बोलकर लिखने की सुविधा नहीं है। लिखकर बताएँ।</string>
     <string name="err_barcode_not_found">यह प्रोडक्ट अभी डेटाबेस में नहीं है। प्लेट की फ़ोटो लें या लिखकर बताएँ।</string>
     <string name="err_invalid_backup">यह MyCalories की बैकअप फ़ाइल नहीं है।</string>
     <string name="err_bad_key">API चाबी स्वीकार नहीं हुई। local.properties में GEMINI_API_KEY जाँचें: यह aistudio.google.com से मिली पूरी चाबी होनी चाहिए, जो AIza से शुरू होती है।</string>
@@ -219,7 +201,7 @@
 
     <!-- रेसिपी -->
     <string name="new_recipe_title">नई रेसिपी</string>
-    <string name="recipe_hint">रेसिपी का नाम, हर सामग्री और उसकी मात्रा, और कितने कटोरे बनते हैं, बोलें।</string>
+    <string name="recipe_hint">रेसिपी का नाम, हर सामग्री और उसकी मात्रा, और कितने कटोरे बनते हैं, लिखें।</string>
     <string name="recipe_example">जैसे \"मम्मी की दाल: एक कप अरहर दाल, दो बड़े चम्मच घी, एक प्याज़, एक टमाटर। चार कटोरे बनते हैं।\"</string>
     <string name="recipe_name">रेसिपी का नाम</string>
     <string name="makes">कितना बनता है</string>
@@ -340,7 +322,7 @@
     <string name="sent_text">आप जो बोलते या लिखते हैं, और प्लेट की फ़ोटो, खाना पहचानने के लिए एक ऑनलाइन AI सेवा (Groq, या अगर आपने वह सेट किया है तो Google Gemini) को जाती हैं। वह सेवा इन्हें कैसे इस्तेमाल करती है, यह उसकी प्राइवेसी पॉलिसी में देखें; Gemini के मुफ़्त प्लान में Google इनका इस्तेमाल अपने प्रोडक्ट सुधारने के लिए कर सकता है। सादे खानों के नाम USDA को, और बारकोड Open Food Facts को जाते हैं। आपका नाम और ईमेल कभी नहीं भेजा जाता।</string>
     <string name="server_note">ऐसी फ़ोटो न लें जिनमें चेहरे या कोई निजी चीज़ हो। चाहें तो नीचे फ़ोटो से दर्ज करना बंद कर दें।</string>
     <string name="allow_photos">फ़ोटो से दर्ज करने दें</string>
-    <string name="keep_transcript">मैंने जो कहा वह रखें</string>
+    <string name="keep_transcript">मैंने जो लिखा वह रखें</string>
     <string name="keep_transcript_sub">हर खाने के साथ आपके शब्द सेव करता है</string>
     <string name="download_backup">बैकअप फ़ाइल सेव करें</string>
     <string name="restore_backup">बैकअप फ़ाइल से वापस लाएँ</string>
@@ -359,6 +341,28 @@
     <string name="notif_water_title">पानी पीने का समय</string>
     <string name="notif_water_text">आज %2$d में से %1$d गिलास</string>
     <string name="widget_macros">प्रो %1$d · का %2$d · व %3$d ग्राम</string>
-    <string name="widget_speak">बोलें</string>
     <string name="widget_description">आज बची कैलोरी, और बोलकर दर्ज करने का बटन</string>
+
+    <!-- Typing and search -->
+    <string name="err_nothing_typed">पहले लिखें कि आपने क्या खाया।</string>
+    <string name="what_did_you_eat">आपने क्या खाया?</string>
+    <string name="find_calories_for">\"%1$s\" की कैलोरी खोजें</string>
+    <string name="find_calories_hint">AI हर खाना पहचानता है, जैसे \"2 पनीर पराठा और दही\"</string>
+    <string name="your_foods">आपके खाने</string>
+    <string name="from_your_foods">आपके खानों में से · जोड़ने के लिए + दबाएँ</string>
+    <string name="no_food_matches">अभी आपका कोई खाना नहीं मिला। ऊपर कैलोरी खोजें दबाएँ।</string>
+    <string name="type_tip">अपने खाने खोजने के लिए एक खाना लिखें, या पूरा भोजन लिखकर कैलोरी खोजें दबाएँ।</string>
+    <string name="suggestion_line">%1$s %2$s · %3$s ग्राम</string>
+    <string name="add_named_food">%1$s जोड़ें</string>
+    <string name="clear_search">मिटाएँ</string>
+    <string name="meal_so_far">%1$s में अब तक</string>
+    <string name="review">देखें</string>
+    <string name="add_more_typing">लिखकर और जोड़ें</string>
+    <string name="type_recipe">रेसिपी यहाँ लिखें</string>
+    <string name="work_out_recipe">रेसिपी का हिसाब लगाएँ</string>
+    <string name="widget_log">खाना जोड़ें</string>
+    <plurals name="items_kcal">
+        <item quantity="one">%1$d खाना · %2$s kcal</item>
+        <item quantity="other">%1$d खाने · %2$s kcal</item>
+    </plurals>
 </resources>

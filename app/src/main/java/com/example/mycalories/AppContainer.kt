@@ -41,8 +41,6 @@ import com.example.mycalories.platform.AndroidPdfMaker
 import com.example.mycalories.platform.CaloriesWidget
 import com.example.mycalories.platform.HealthConnectSource
 import com.example.mycalories.platform.WorkManagerReminderScheduler
-import com.example.mycalories.voice.AndroidVoiceInput
-import com.example.mycalories.voice.VoiceInput
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.engine.okhttp.OkHttp
@@ -103,11 +101,6 @@ class AppContainer(context: Context) {
     val assistant = AiAssistant(ai)
     val packagedFoods: PackagedFoodSource = OpenFoodFactsSource(http)
     val resolver = FoodResolver(foods, UsdaNutritionSource(http, BuildConfig.USDA_API_KEY), portions)
-
-    /** Speech in Hindi when the app is in Hindi, Indian English otherwise. */
-    fun voiceInput(): VoiceInput = AndroidVoiceInput(app) {
-        if (java.util.Locale.getDefault().language == "hi") "hi-IN" else "en-IN"
-    }
 
     init {
         scope.launch {

@@ -60,10 +60,10 @@ import com.example.mycalories.ui.components.shortMacros
 import com.example.mycalories.ui.theme.MacroColors
 
 @Composable
-fun MealDetailRoute(viewModel: MealDetailViewModel, onBack: () -> Unit, onAddByVoice: () -> Unit, onMicros: () -> Unit = {}) {
+fun MealDetailRoute(viewModel: MealDetailViewModel, onBack: () -> Unit, onAdd: () -> Unit, onMicros: () -> Unit = {}) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     MealDetailScreen(
-        state, onBack, onAddByVoice,
+        state, onBack, onAdd,
         onDelete = viewModel::delete, onUndo = viewModel::undoDelete, onUpdate = viewModel::update,
         onMoveAll = viewModel::moveAll, onRepeatTomorrow = viewModel::repeatTomorrow, onMessageShown = viewModel::messageShown,
         onMicros = onMicros,
@@ -75,7 +75,7 @@ fun MealDetailRoute(viewModel: MealDetailViewModel, onBack: () -> Unit, onAddByV
 fun MealDetailScreen(
     state: MealDetailUiState,
     onBack: () -> Unit,
-    onAddByVoice: () -> Unit,
+    onAdd: () -> Unit,
     onDelete: (Long) -> Unit,
     onUndo: () -> Unit,
     onUpdate: (LoggedItem, Double, String) -> Unit,
@@ -107,7 +107,7 @@ fun MealDetailScreen(
                 title = { Text(state.meal.label()) },
                 navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.AutoMirrored.Filled.ArrowBack, stringResource(R.string.back)) } },
                 actions = {
-                    IconButton(onClick = onAddByVoice) { Icon(Icons.Filled.Add, stringResource(R.string.add_food)) }
+                    IconButton(onClick = onAdd) { Icon(Icons.Filled.Add, stringResource(R.string.add_food)) }
                     IconButton(onClick = onRepeatTomorrow) { Icon(Icons.Filled.ContentCopy, stringResource(R.string.repeat_tomorrow)) }
                     androidx.compose.foundation.layout.Box {
                         IconButton(onClick = { menu = true }) { Icon(Icons.Filled.MoreVert, stringResource(R.string.more_options)) }

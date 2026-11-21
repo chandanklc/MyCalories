@@ -62,7 +62,7 @@ class AiFoodParser(
 
     override suspend fun parse(text: String): ParsedMeal {
         val spoken = text.trim()
-        if (spoken.isEmpty()) throw FoodParserException(AppError.NO_SPEECH)
+        if (spoken.isEmpty()) throw FoodParserException(AppError.NOTHING_TYPED)
         val reply = transport.call(AiRequest(systemPrompt(knownFoodNames()), listOf(ChatMessage.user(spoken)), schema = ParsedMealJson.schema))
         return ParsedMealJson.decode(reply)
     }
@@ -77,7 +77,7 @@ class AiFoodParser(
 
     override suspend fun parseRecipe(text: String): ParsedRecipe {
         val spoken = text.trim()
-        if (spoken.isEmpty()) throw FoodParserException(AppError.NO_SPEECH)
+        if (spoken.isEmpty()) throw FoodParserException(AppError.NOTHING_TYPED)
         val reply = transport.call(AiRequest(RECIPE_PROMPT, listOf(ChatMessage.user(spoken)), schema = RecipeJson.schema))
         return RecipeJson.decode(reply)
     }
@@ -102,13 +102,14 @@ class AiFoodParser(
             appendLine("The person is usually in India and may mix English and Hindi words.")
             appendLine()
             appendLine("For each food they mention, return:")
-            appendLine("- name: a short common English name, e.g. \"Roti\", \"Dal tadka\", \"Boiled egg\". If a known food below matches, use its exact name.")
+            appendLine("- name: a short common English name, e.g. \"Roti\", \"Dal tadka\", \"Boiled egg\". If a known food below is the same food, use its exact name; a different variety is not a match (Paneer paratha is not Paratha).")
             appendLine("- quantity and unit as they said them (piece, bowl, katori, cup, glass, plate, slice, tbsp, tsp, g, ml).")
             appendLine("- grams: your best estimate of the total weight eaten, using typical Indian home portions (1 roti ≈ 40 g, 1 katori ≈ 150 g, 1 bowl ≈ 200 g, 1 cup cooked rice ≈ 158 g, 1 glass ≈ 250 ml).")
             appendLine("- amount_guessed: true only if they gave no amount and you assumed one serving.")
             appendLine("- usda_search_term: for a plain single-ingredient food (fruit, egg, milk, plain rice, nuts) a USDA FoodData Central search phrase such as \"rice, white, cooked\"; null for mixed dishes, recipes and Indian preparations.")
             appendLine("- per_100g: your best estimate of nutrients per 100 g as the food is usually prepared (energy in kcal; protein, carbs, fat, fiber and sugar in g; sodium, iron, calcium, vitamin C and potassium in mg; vitamin B12 and vitamin D in µg).")
-            appendLine("If ingredients of one dish are listed, return the dish as one food unless they clearly ate them separately.")
+            appendLine("Return every food they mention as its own item. Foods eaten together are separate items: \"2 roti with dal\" is Roti and Dal, \"rice and curd\" is Rice and Curd.")
+            appendLine("Sides and toppings are separate items too: butter, ghee, pickle, chutney, raita and salad. Only combine words into one item when they are the ingredients of a single cooked dish, e.g. \"rice cooked with peas\" is Peas pulao.")
             appendLine()
             appendLine("meal: breakfast, lunch, snack or dinner only if they said which meal or clearly implied it (\"this morning\", \"at night\"); otherwise null.")
             appendLine("If there is no food, return an empty items list.")

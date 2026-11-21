@@ -19,8 +19,6 @@ import com.example.mycalories.domain.repository.FoodRepository
 import com.example.mycalories.domain.repository.LogRepository
 import com.example.mycalories.domain.repository.ProfileRepository
 import com.example.mycalories.domain.repository.SavedMealRepository
-import com.example.mycalories.voice.VoiceEvent
-import com.example.mycalories.voice.VoiceInput
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -133,17 +131,6 @@ class FakeOnlineSource(private val results: Map<String, Nutrients> = emptyMap(),
         if (fail) throw java.io.IOException("offline")
         return results[term]
     }
-}
-
-class FakeVoiceInput : VoiceInput {
-    val events = MutableSharedFlow<VoiceEvent>(extraBufferCapacity = 16)
-    var started = 0
-    var stopped = 0
-    override fun listen(): Flow<VoiceEvent> {
-        started++
-        return events
-    }
-    override fun stop() { stopped++ }
 }
 
 class FakeSettingsRepository(initial: com.example.mycalories.domain.repository.AppSettings = com.example.mycalories.domain.repository.AppSettings()) :

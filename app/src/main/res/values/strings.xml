@@ -15,7 +15,6 @@
     <string name="kcal_value">%1$s kcal</string>
     <string name="grams_value">%1$s g</string>
     <string name="try_again">Try again</string>
-    <string name="type_instead">Type instead</string>
     <string name="send">Send</string>
 
     <!-- Meals -->
@@ -87,7 +86,6 @@
     <string name="copy_whole_day">Copy whole day</string>
     <string name="copied_meal">Copied yesterday\'s %1$s</string>
     <string name="copied_day">Copied all of yesterday</string>
-    <string name="speak_what_you_ate">Speak what you ate</string>
     <string name="log_by_photo">Log by photo</string>
     <string name="scan_barcode">Scan a barcode</string>
     <string name="ask_about_food">Ask about your food</string>
@@ -125,25 +123,12 @@
     <!-- Log a meal -->
     <string name="log_meal_title">Log a meal</string>
     <string name="check_before_saving">Check before saving</string>
-    <string name="listening">Listening…</string>
-    <string name="tap_mic_hint">Tap the mic and say what you ate</string>
-    <string name="transcript_example">e.g. \"Two roti, a bowl of dal and some salad for lunch\"</string>
-    <string name="tip_amount">Tip: include the meal and amount, e.g. \"for dinner, 150 g paneer\"</string>
     <string name="working_out">Working out calories…</string>
     <string name="this_meal">This meal</string>
     <string name="save_favourite">Save as a favourite meal</string>
     <string name="favourite_name">Name</string>
     <string name="favourite_placeholder">My %1$s</string>
-    <string name="type_more">Type more</string>
-    <string name="say_more">Say more</string>
     <string name="add_to_meal">Add %1$s kcal to %2$s</string>
-    <string name="type_what_you_ate">Type what you ate</string>
-    <string name="start_speaking">Start speaking</string>
-    <string name="done_speaking">Done speaking</string>
-    <string name="which_meal">Which meal is this?</string>
-    <string name="which_meal_hint">You didn\'t say. We think it\'s %1$s.</string>
-    <string name="suggested">Suggested</string>
-    <string name="always_pick">Always pick by time of day, don\'t ask</string>
     <string name="change_meal">Change meal</string>
     <string name="edit_item">Edit %1$s</string>
     <string name="item_line">%1$s %2$s · %3$s g · %4$s</string>
@@ -151,15 +136,12 @@
     <string name="photo_estimate_note">Portions from photos are estimates. Check each amount.</string>
 
     <!-- Errors -->
-    <string name="err_no_speech">I didn\'t hear anything. Tap the mic and try again.</string>
     <string name="err_no_food">I didn\'t catch any food in that. Try something like \"two roti and a bowl of dal\".</string>
     <string name="err_network">Couldn\'t connect. Check your internet and try again.</string>
     <string name="err_refused">That couldn\'t be processed. Try describing it differently.</string>
     <string name="err_too_long">That was too long. Try one meal at a time.</string>
     <string name="err_bad_reply">Something went wrong reading the reply. Please try again.</string>
     <string name="err_not_configured">The food service isn\'t set up yet. Add GEMINI_API_KEY to local.properties (free key from aistudio.google.com).</string>
-    <string name="err_mic_permission">Microphone permission is needed to log by voice.</string>
-    <string name="err_speech_unavailable">Speech recognition isn\'t available on this phone. Type instead.</string>
     <string name="err_barcode_not_found">This product isn\'t in the database yet. Try a photo of the plate or type it.</string>
     <string name="err_invalid_backup">That isn\'t a MyCalories backup file.</string>
     <string name="err_bad_key">The API key was rejected. Check GEMINI_API_KEY in local.properties: it should be your full key from aistudio.google.com, starting with AIza.</string>
@@ -219,7 +201,7 @@
 
     <!-- Recipe -->
     <string name="new_recipe_title">New recipe</string>
-    <string name="recipe_hint">Say the recipe name, every ingredient with its amount, and how many bowls it makes.</string>
+    <string name="recipe_hint">Type the recipe name, every ingredient with its amount, and how many bowls it makes.</string>
     <string name="recipe_example">e.g. \"Mom\'s dal: one cup toor dal, two tablespoons ghee, one onion, one tomato. Makes four bowls.\"</string>
     <string name="recipe_name">Recipe name</string>
     <string name="makes">Makes</string>
@@ -340,7 +322,7 @@
     <string name="sent_text">What you say or type, and plate photos, go to an online AI service (Groq, or Google Gemini if you set that up instead) to find the foods. Check that service\'s privacy policy for how it handles what you send; on Gemini\'s free tier, Google may use it to improve its products. Plain food names go to USDA, and barcodes to Open Food Facts. Your name and email are never sent.</string>
     <string name="server_note">Avoid photos with faces or anything private in them. Turn off photo logging below if you prefer.</string>
     <string name="allow_photos">Allow photo logging</string>
-    <string name="keep_transcript">Keep what I said</string>
+    <string name="keep_transcript">Keep what I typed</string>
     <string name="keep_transcript_sub">Saves your words next to each food</string>
     <string name="download_backup">Save a backup file</string>
     <string name="restore_backup">Restore from a backup file</string>
@@ -359,6 +341,28 @@
     <string name="notif_water_title">Time for a glass of water</string>
     <string name="notif_water_text">%1$d of %2$d glasses today</string>
     <string name="widget_macros">P %1$d · C %2$d · F %3$d g</string>
-    <string name="widget_speak">Speak</string>
     <string name="widget_description">Calories left today, and a button to log by voice</string>
+
+    <!-- Typing and search -->
+    <string name="err_nothing_typed">Type what you ate first.</string>
+    <string name="what_did_you_eat">What did you eat?</string>
+    <string name="find_calories_for">Find calories for \"%1$s\"</string>
+    <string name="find_calories_hint">AI works out every food, e.g. \"2 paneer paratha with curd\"</string>
+    <string name="your_foods">Your foods</string>
+    <string name="from_your_foods">From your foods · tap + to add</string>
+    <string name="no_food_matches">None of your foods match yet. Use Find calories above.</string>
+    <string name="type_tip">Type one food to search your foods, or a whole meal and tap Find calories.</string>
+    <string name="suggestion_line">%1$s %2$s · %3$s g</string>
+    <string name="add_named_food">Add %1$s</string>
+    <string name="clear_search">Clear</string>
+    <string name="meal_so_far">%1$s so far</string>
+    <string name="review">Review</string>
+    <string name="add_more_typing">Add more by typing</string>
+    <string name="type_recipe">Type the recipe here</string>
+    <string name="work_out_recipe">Work out the recipe</string>
+    <string name="widget_log">Log food</string>
+    <plurals name="items_kcal">
+        <item quantity="one">%1$d food · %2$s kcal</item>
+        <item quantity="other">%1$d foods · %2$s kcal</item>
+    </plurals>
 </resources>
